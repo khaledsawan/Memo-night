@@ -1,0 +1,18 @@
+const Map<String, String> en = {
+  "Title": "Title",
+  "Settings": "Settings",
+  "Language": "Language",
+  "Contact Us": "Contact Us",
+  "Log Out": "Log Out",
+  "Login": "Login",
+  "Name": "Name",
+  "Email": "Email",
+  "Phone Number": "Phone Number",
+  "Common Info": "Common Info",
+  "Add": "Add",
+  "Continue": "Continue",
+  "OR": "OR",
+  "Sign Up": "Sign Up",
+  "Phone :  +963 988 550 610": "Phone :  +963 988 550 610",
+  "Add Products": "Add Products",
+};

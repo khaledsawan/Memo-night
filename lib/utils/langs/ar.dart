@@ -1,0 +1,16 @@
+const Map<String, String> ar = {
+  "Title": "العنوان",
+  "Settings": "الاعدادات",
+  "Language": "اللغة",
+  "Contact Us": "تواصل معنا",
+  "Log Out": "تسحيل الخروج",
+  "Email": "الإيميل ",
+  "Phone Number": "رقم الهاتف",
+  "Add": "اضافة",
+  "Continue": "استمرار",
+  "OR": "او",
+  "Does not have account?": "ليس لديك حساب ؟",
+  "Sign Up": "تسحيل حساب ",
+  "Login": "تسجيل الدخول",
+  "Phone :  +963 988 550 610": "رقم الهاتف: 0988550610",
+};
