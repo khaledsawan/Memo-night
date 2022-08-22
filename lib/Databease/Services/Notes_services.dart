@@ -6,28 +6,26 @@ import 'package:get/get.dart';
 import 'package:memo_night/routes/routes.dart';
 
 class Notes_services {
-  static late Reference ref;
-  static CollectionReference notesref =
-      FirebaseFirestore.instance.collection("Notes");
 
-  static Future<void> AddNote_services({
+  static CollectionReference notesRef =
+      FirebaseFirestore.instance.collection("Notes");
+  static Future<void> addNoteService( {
+    // required Reference reference,
     required String title,
+    required String time,
     required String body,
-    required File file,
+    required String image,
   }) async {
-    await ref.putFile(file);
-    var imageurl = await ref.getDownloadURL();
-    print(imageurl);
-    print('//////////////////////////////////////////////////');
-    await notesref.add({
-      "title": 'dfsfdsf',
-      "body": 'bodyController.text',
-      "imageurl": 'imageurl',
+    await notesRef.add({
+      "title": title,
+      "body": body,
+      "time": Timestamp.now(),
+      "imageUrl": image,
       "userid": FirebaseAuth.instance.currentUser!.uid
     }).then((value) {
-      Get.toNamed(AppRoutes.notes);
+      Get.offNamed(AppRoutes.notes);
     }).catchError((e) {
-      print("$e");
+      GetSnackBar(message: "$e");
     });
   }
 }

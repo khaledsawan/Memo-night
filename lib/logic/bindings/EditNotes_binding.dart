@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
-import 'package:memo_night/logic/Controllers/AddNote_Controller.dart';
-
+import 'package:memo_night/logic/Controllers/edit_note_controller.dart';
 import '../Controllers/Auth_Controller.dart';
 
-class EditNotes_binding extends Bindings {
+class EditNotesBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AddNoteController());
     Get.lazyPut(()=>AuthController());
+    Get.lazyPut(()=>EditNoteController());
   }
 }

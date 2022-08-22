@@ -6,21 +6,17 @@ import 'package:get_storage/get_storage.dart';
 import 'package:memo_night/logic/Controllers/Register_Controller.dart';
 import 'package:memo_night/logic/bindings/Auth_binding.dart';
 import 'package:memo_night/routes/routes.dart';
-import 'package:memo_night/views/screens/crud/EditNotes.dart';
-import 'package:memo_night/views/screens/crud/Note_body_page.dart';
-import 'package:memo_night/views/screens/auth/login.dart';
-import 'package:memo_night/views/screens/auth/signup.dart';
 import 'package:memo_night/utils/langs/translations.dart';
-import 'package:memo_night/views/screens/crud/addnote.dart';
+import 'init/init.dart';
 import 'logic/Controllers/Login_Controller.dart';
-import 'views/screens/home_page/Notes.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(const MyApp());
 }
 
@@ -31,11 +27,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      Get.lazyPut(()=>LoginController());
-      Get.lazyPut(()=>RegisterController());
+      Get.lazyPut(() => LoginController());
+      Get.lazyPut(() => RegisterController());
     }
     return GetMaterialApp(
-      initialBinding: Auth_binding(),
+      debugShowCheckedModeBanner: false,
+      initialBinding: AuthBinding(),
       theme: ThemeData.dark().copyWith(
         primaryColor: const Color(0xFF0A0E21),
         scaffoldBackgroundColor: const Color(0xFF0A0E21),
@@ -53,17 +50,9 @@ class MyApp extends StatelessWidget {
         // GlobalWidgetsLocalizations.delegate,
         // GlobalCupertinoLocalizations.delegate,
       ],
-      getPages: AppRoutes.routes,
-      routes: {
-        "login": (context) => Login(),
-        "sighup": (context) => Signup(),
-        "Notes":(context)=>Notes(),
-        "EditNotes":(context)=>EditNotes(),
-        "AddNote":(context)=>AddNote(),
-        "Note_body_page":(context)=>Note_body_page(Note_title: '',Note_body: '',imageurl: '',),
-      },
-      debugShowCheckedModeBanner: false,
-      home: user == null ? Login() : Notes(),
+       getPages: AppRoutes.routes,
+       initialRoute:AppRoutes.splashscreen ,
+     // home: const Index(),
     );
   }
 }

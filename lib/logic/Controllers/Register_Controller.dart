@@ -3,34 +3,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:memo_night/Databease/Services/auth_services.dart';
+import 'package:memo_night/Databease/model/response_model.dart';
 import 'package:memo_night/routes/routes.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../views/screens/crud/index.dart';
 
 class RegisterController extends GetxController {
   var isLoading = false.obs;
   final registerForKey = GlobalKey<FormState>();
   late TextEditingController nameController,
       emailController,
-      phone_noController,
+      phoneController,
       passwordController;
-  String name = '', email = '', password = '', phone_no = '', data = '';
+  String name = '', email = '', password = '', phone = '';
   final storage = const FlutterSecureStorage();
-
-  @override
-  void onInit() {
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    phone_noController = TextEditingController();
-    super.onInit();
-  }
 
   @override
   void dispose() {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    phone_noController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
@@ -50,14 +43,15 @@ class RegisterController extends GetxController {
     }
   }
 
-  String? validatephone_no(String value) {
+  String? validatePhone(String value) {
     if (!GetUtils.isPhoneNumber(value)) {
       return "enter phone number ";
-    } else
+    } else {
       return null;
+    }
   }
 
-  String? validatename(String value) {
+  String? validateName(String value) {
     if (value.length < 2) {
       return "short name ";
     } else {
@@ -65,30 +59,60 @@ class RegisterController extends GetxController {
     }
   }
 
-  Future DoRegister() async {
+  Future register() async {
     bool invalidate = registerForKey.currentState!.validate();
     if (invalidate) {
       isLoading(true);
       try {
-        UserCredential data = await AuthService.register(
+        ResponseModel data = await AuthService.register(
           email: emailController.text,
           password: passwordController.text,
         );
-        if (data != null) {
+        if (data.isSuccessful!) {
           FirebaseFirestore.instance.collection('User').add({
             "email": emailController.text,
             "password": passwordController.text,
-            "username":nameController.text,
-            "phoneNumber":phone_noController.text
+            "username": nameController.text,
+            "phoneNumber": phoneController.text
           });
-          Get.off(AppRoutes.notes);
-          Get.snackbar('welcome back', '');
+          Get.offAllNamed(AppRoutes.notes);
+          Get.snackbar(' Welcome ', '');
         } else {
-          Get.dialog(Text('filed signup'));
+          Get.dialog(Text(data.massage!.toString()));
         }
       } finally {
         isLoading(false);
       }
+    }
+  }
+
+  doLoginGoogle() async {
+    isLoading(true);
+    try {
+      UserCredential data = await AuthService.signInWithGoogle();
+      if (!data.isNull) {
+        Get.offAllNamed(AppRoutes.login);
+        Get.snackbar('successful', '');
+      } else {
+        Get.dialog(const Text('filed signup'));
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  doLoginFacebook() async {
+    isLoading(true);
+    try {
+      var data = await AuthService.signInWithGoogle();
+      if (!data.isNull) {
+        Get.offAllNamed(AppRoutes.login);
+        Get.dialog(const Text('successful'));
+      } else {
+        Get.dialog(const Text('filed signup'));
+      }
+    } finally {
+      isLoading(false);
     }
   }
 }
