@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:memo_night/Databease/Services/auth_services.dart';
 import 'package:memo_night/logic/Controllers/Login_Controller.dart';
 import 'package:memo_night/routes/routes.dart';
-import 'package:memo_night/views/screens/auth/signup.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
