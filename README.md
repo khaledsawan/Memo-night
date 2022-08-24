@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 # mnv2
+=======
+# memo_night
+## memo phone application using flutter(using GetX) and firebase (Auth,crud), check the apk image folder.
+
+
+>>>>>>> 4b76b3262e1c2d3241adc527c0067a627514f999
 
 A new Flutter project.
 
