@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
-import 'package:memo_night/Databease/Services/auth_services.dart';
-import 'package:memo_night/Databease/model/response_model.dart';
-import 'package:memo_night/routes/routes.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../../views/screens/crud/index.dart';
+
+import '../../Databease/Services/auth_services.dart';
+import '../../Databease/model/response_model.dart';
+import '../../routes/routes.dart';
 
 class RegisterController extends GetxController {
   var isLoading = false.obs;
@@ -16,7 +16,6 @@ class RegisterController extends GetxController {
       phoneController,
       passwordController;
   String name = '', email = '', password = '', phone = '';
-  final storage = const FlutterSecureStorage();
 
   @override
   void dispose() {
@@ -104,13 +103,16 @@ class RegisterController extends GetxController {
   doLoginFacebook() async {
     isLoading(true);
     try {
-      var data = await AuthService.signInWithGoogle();
-      if (!data.isNull) {
-        Get.offAllNamed(AppRoutes.login);
-        Get.dialog(const Text('successful'));
-      } else {
-        Get.dialog(const Text('filed signup'));
-      }
+
+        // Trigger the sign-in flow
+        final LoginResult loginResult = await FacebookAuth.instance.login();
+
+        // Create a credential from the access token
+        final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+        // Once signed in, return the UserCredential
+        return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+
     } finally {
       isLoading(false);
     }

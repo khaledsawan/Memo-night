@@ -1,6 +1,6 @@
 {
-    "name": "memo_night",
-    "short_name": "memo_night",
+    "name": "mnv2",
+    "short_name": "mnv2",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

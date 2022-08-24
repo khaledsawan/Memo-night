@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memo_night/logic/Controllers/edit_note_controller.dart';
+import 'package:sizer/sizer.dart';
 import '../../../Databease/model/note_model.dart';
+import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
 
 class EditNote extends StatefulWidget {
@@ -42,16 +43,16 @@ class _EditNoteState extends State<EditNote> {
                         child: Text(
                           'Update note',
                           style: GoogleFonts.marckScript(
-                            fontSize: 35,
+                            fontSize: 30.sp,
                             color: AppColors.blue,
                           ),
                         ),
                       ))),
               floatingActionButton: FloatingActionButton(
-                  child: const Icon(
+                  child:  Icon(
                     Icons.update,
                     color: AppColors.blue,
-                    size: 35,
+                    size: 30.sp,
                   ),
                   backgroundColor: Colors.indigo,
                   onPressed: () async {
@@ -69,17 +70,17 @@ class _EditNoteState extends State<EditNote> {
                                 // await _download(imageUrl);
                               },
                               child: Container(
-                                margin: const EdgeInsets.all(8),
-                                padding: const EdgeInsets.all(8),
-                                width: width * 0.9,
-                                height: height * 0.25,
+                                margin: EdgeInsets.fromLTRB(8.w, 1.h,8.w, 0.1.h),
+                                padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 0.1.h),
+                                width: width * 0.9.w,
+                                height: height * 0.03.h,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                         image: NetworkImage(note.imageUrl)),
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(2.h),
                                     border: Border.all(
-                                        width: 1, color: AppColors.blue)),
+                                        width: 0.5.w, color: AppColors.blue)),
                               ),
                             ),
                             GestureDetector(
@@ -90,13 +91,13 @@ class _EditNoteState extends State<EditNote> {
                                 Get.snackbar('', 'text has copy');
                               },
                               child: Container(
-                                margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                margin: EdgeInsets.fromLTRB(4.w, 1.h,4.w, 0.h),
                                 child: TextFormField(
                                   controller: controller.titleController,
                                   style: GoogleFonts.robotoCondensed(
-                                    fontSize: 28,
+                                    fontSize: 24.sp,
                                     wordSpacing: 3,
-                                    height: 1.5,
+                                    height: 0.15.h,
                                     fontStyle: FontStyle.italic,
                                     color: AppColors.blue,
                                   ),
@@ -111,14 +112,14 @@ class _EditNoteState extends State<EditNote> {
                                 Get.snackbar('', 'text has copy');
                               },
                               child: Container(
-                                margin: const EdgeInsets.only(left: 4, top: 10),
+                                margin:  EdgeInsets.only(left: 2.w, top: 1.5.h),
                                 child: TextFormField(
                                   controller: controller.bodyController,
-                                  maxLines: 500,
+                                  maxLines: 10000,
                                   style: GoogleFonts.robotoCondensed(
-                                    fontSize: 22,
+                                    fontSize: 16.sp,
                                     wordSpacing: 3,
-                                    height: 1.5,
+                                    height: 0.15.h,
                                     fontStyle: FontStyle.italic,
                                     color: AppColors.white70,
                                   ),
@@ -130,7 +131,7 @@ class _EditNoteState extends State<EditNote> {
                       ),
                     ),
                     Container(
-                        margin: const EdgeInsets.only(right: 10),
+                        margin:  EdgeInsets.only(right: 2.w),
                         alignment: Alignment.bottomRight,
                         child: Text(note.time.toString(),
                             style: const TextStyle(color: AppColors.white70))),
@@ -143,9 +144,9 @@ class _EditNoteState extends State<EditNote> {
                       color: AppColors.white,
                       child: Center(
                         child: Text(
-                          'Update note',
+                          'Update note'.tr,
                           style: GoogleFonts.marckScript(
-                            fontSize: 35,
+                            fontSize: 30.sp,
                             color: AppColors.blue,
                           ),
                         ),

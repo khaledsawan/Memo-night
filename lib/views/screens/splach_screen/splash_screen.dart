@@ -2,9 +2,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memo_night/utils/colors.dart';
-import 'package:memo_night/views/screens/auth/login.dart';
-
+import '../../../utils/colors.dart';
+import '../auth/login.dart';
 import '../crud/index.dart';
 
 class splachScreen extends StatefulWidget {
@@ -26,7 +25,7 @@ class _splachScreenState extends State<splachScreen> {
     });
     Timer(const Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          SlideTransitionAnimation(user == null ? Login() : const Index()));
+          SlideTransitionAnimation(user == null ? const Login() : const Index()));
     });
   }
 

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:memo_night/views/screens/crud/index.dart';
 import '../../Databease/model/note_model.dart';
+import '../../views/screens/crud/index.dart';
 
 class EditNoteController extends GetxController {
   late TextEditingController titleController, bodyController;
@@ -28,11 +28,11 @@ class EditNoteController extends GetxController {
     isLoading = true;
     update();
     try {
-      await notes.doc('p2Vm6czIR9VXEhF8C5Vx').update({
+      await notes.doc(note.id).update({
         'body': bodyController.text,
         'title': titleController.text,
-        'imageUrl': note.imageUrl,
-        'userid': FirebaseAuth.instance.currentUser!.uid,
+        //'imageUrl': note.imageUrl,
+       // 'userid': FirebaseAuth.instance.currentUser!.uid,
         'time': DateTime.now(),
       }).then((value) {
         isLoading = false;

@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
-import 'package:memo_night/logic/Controllers/Auth_Controller.dart';
-import 'package:memo_night/logic/Controllers/edit_note_controller.dart';
+
+import '../Controllers/Auth_Controller.dart';
+import '../Controllers/edit_note_controller.dart';
+
 
 
 

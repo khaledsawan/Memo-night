@@ -2,30 +2,36 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memo_night/utils/colors.dart';
 import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:memo_night/logic/Controllers/AddNote_Controller.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../logic/Controllers/AddNote_Controller.dart';
+import '../../../utils/colors.dart';
+
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);
   @override
   State<AddNote> createState() => _AddNoteState();
 }
+
 class _AddNoteState extends State<AddNote> {
   final AddNoteController controller = Get.find();
   showBottomSheet(context) {
+    double height = MediaQuery.of(context).size.height;
     return showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
-            padding: const EdgeInsets.all(20),
-            height: 180,
+            padding: EdgeInsets.fromLTRB(2.w, 1.h, 1.w, 1.h),
+            height: height * 0.025.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "Please Choose Image",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
                 InkWell(
                   onTap: () async {
@@ -44,17 +50,17 @@ class _AddNoteState extends State<AddNote> {
                   },
                   child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                       child: Row(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.photo_outlined,
-                            size: 30,
+                            size: 22.sp,
                           ),
-                          SizedBox(width: 20),
+                          SizedBox(width: 5.w),
                           Text(
                             "From Gallery",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 18.sp),
                           )
                         ],
                       )),
@@ -77,17 +83,17 @@ class _AddNoteState extends State<AddNote> {
                   },
                   child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                       child: Row(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.camera,
-                            size: 30,
+                            size: 22.sp,
                           ),
-                          SizedBox(width: 20),
+                          SizedBox(width: 5.w),
                           Text(
                             "From Camera",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 18.sp),
                           )
                         ],
                       )),
@@ -97,6 +103,7 @@ class _AddNoteState extends State<AddNote> {
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -104,20 +111,18 @@ class _AddNoteState extends State<AddNote> {
     return !controller.isLoad
         ? Scaffold(
             appBar: AppBar(
-              backgroundColor:AppColors.mainColor,
+              backgroundColor: AppColors.mainColor,
               automaticallyImplyLeading: true,
               title: Title(
                 title: 'Title',
                 color: AppColors.iconColor1,
-                child: Text(
-                  'Add Note'.tr,
-                  style: GoogleFonts.marckScript(
-                    fontSize: 35,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.blue,
-                  )
-                ),
+                child: Text('Add Note'.tr,
+                    style: GoogleFonts.marckScript(
+                      fontSize: 30.sp,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blue,
+                    )),
               ),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
@@ -129,9 +134,9 @@ class _AddNoteState extends State<AddNote> {
                 child: ListView(
                   children: [
                     Container(
-                      padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                      margin: const EdgeInsets.only(
-                          left: 0, top: 0, right: 0, bottom: 10.0),
+                      padding: EdgeInsets.fromLTRB(2.w, 2.h, 2.w, 0.h),
+                      margin: EdgeInsets.only(
+                          left: 0, top: 0, right: 0, bottom: 0.1.h),
                       child: TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (v) {
@@ -144,7 +149,7 @@ class _AddNoteState extends State<AddNote> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText: 'Title'.tr,
-                          labelStyle: const TextStyle(fontSize: 25),
+                          labelStyle: TextStyle(fontSize: 18.sp),
                           prefixIcon: const Padding(
                             padding:
                                 EdgeInsets.only(), // add padding to adjust icon
@@ -157,32 +162,23 @@ class _AddNoteState extends State<AddNote> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin: const EdgeInsets.only(
-                          left: 0, top: 0, right: 0, bottom: 5.0),
-                      height: height * 0.3,
+                      padding: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 0.h),
+                      margin: EdgeInsets.only(
+                          left: 0, top: 0, right: 0, bottom: 2.h),
+                      height: height-height*0.4,
                       child: TextFormField(
-                        maxLines: 10,
+                        maxLines: 10000,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (v) {
-                          return controller.validateString(v!);
-                        },
+
                         onSaved: (v) {
                           controller.bodyController != v;
                         },
                         controller: controller.bodyController,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'body',
-                          labelStyle: TextStyle(fontSize: 20),
-                          prefixIcon: Padding(
-                            padding:
-                                EdgeInsets.only(), // add padding to adjust icon
-                            child: Icon(
-                              Icons.subtitles,
-                              color: AppColors.iconColor1,
-                            ),
-                          ),
+                          labelText: '',
+                          labelStyle: TextStyle(fontSize: 16.sp),
+
                         ),
                       ),
                     ),
@@ -192,29 +188,25 @@ class _AddNoteState extends State<AddNote> {
                               showBottomSheet(context);
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                              margin: const EdgeInsets.only(
-                                  left: 10, top: 0, right: 10, bottom: 10.0),
-                              width: double.infinity,
-                              height: 50,
-                              //color: Color(0xFF2A0445),
+                              margin: EdgeInsets.only(
+                                  left: 30.w, top: 0, right: 30.w, bottom: 2.h),
+
+                              height: height*0.07,
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(1.h),
                                 border: Border.all(color: AppColors.blue),
                               ),
-                              child: const Center(
+                              child:  Center(
                                   child: Text(
-                                "Add image",
-                                style: TextStyle(color: AppColors.iconColor1),
+                                "Add image".tr,
+                                style: TextStyle(color: AppColors.iconColor1,fontSize: 14.sp),
                               )),
                             ),
                           )
                         : Container(
-                            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                            margin: const EdgeInsets.only(
-                                left: 8, top: 0, right: 8, bottom: 10.0),
-                            width: width,
+
+                            width: width-width*0.05,
                             height: height * 0.35,
                             child: Stack(
                               //fit: StackFit.expand,
@@ -223,41 +215,38 @@ class _AddNoteState extends State<AddNote> {
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: AppColors.iconColor2,
-                                          width: 2),
-                                      borderRadius: BorderRadius.circular(45),
+                                          width: 1.w),
+                                      borderRadius: BorderRadius.circular(2.h),
                                       image: DecorationImage(
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fill,
                                           image: FileImage(
                                             File(controller.image!.path),
                                           ))),
                                 ),
                                 Positioned(
-                                    left: width - 85,
-                                    top: 10,
+                                    left: width-15.w,
+                                    top: 2.h,
                                     child: GestureDetector(
                                       onTap: () {
                                         setState(() {
                                           controller.imageName;
                                         });
                                         controller.clearImage();
-
                                       },
-                                      child: const Icon(
+                                      child:  Icon(
                                         Icons.clear,
                                         color: AppColors.red,
-                                        size: 35,
+                                        size: 6.h,
                                       ),
                                     ))
                               ],
                             )),
-
-
                   ],
                 ),
               ),
             ),
             floatingActionButton: FloatingActionButton(
-                child: const Icon(Icons.add, color: AppColors.blue),
+                child:  Icon(Icons.add, color: AppColors.blue,size: 5.h,),
                 backgroundColor: Colors.indigo,
                 onPressed: () async {
                   setState(() {
@@ -269,31 +258,29 @@ class _AddNoteState extends State<AddNote> {
                   });
                 }),
           )
-        :  Scaffold(
-        appBar: AppBar(
-          backgroundColor:AppColors.mainColor,
-          automaticallyImplyLeading: true,
-          title: Title(
-            title: 'Title',
-            color: AppColors.iconColor1,
-            child: Text(
-              'Add Note'.tr,
-              style: GoogleFonts.marckScript(
-                fontSize: 35,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w500,
-                color: AppColors.blue,
-              )
+        : Scaffold(
+            appBar: AppBar(
+              backgroundColor: AppColors.mainColor,
+              automaticallyImplyLeading: true,
+              title: Title(
+                title: 'Title',
+                color: AppColors.iconColor1,
+                child: Text('Add Note'.tr,
+                    style: GoogleFonts.marckScript(
+                      fontSize: 30,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blue,
+                    )),
+              ),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
             ),
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
             body: const Center(
                 child: CircularProgressIndicator(
-            color: AppColors.mainColor,
-          )));
+              color: AppColors.mainColor,
+            )));
   }
 }

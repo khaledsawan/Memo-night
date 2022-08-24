@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memo_night/Databease/model/note_model.dart';
-import 'package:memo_night/views/screens/crud/add_note.dart';
+import 'package:sizer/sizer.dart';
+import '../../../Databease/model/note_model.dart';
 import '../../../logic/Controllers/AddNote_Controller.dart';
 import '../../../logic/Controllers/Auth_Controller.dart';
 import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../logic/Controllers/app_language.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
+import 'add_note.dart';
 import 'note_body_page.dart';
 
 class Index extends StatefulWidget {
@@ -44,8 +45,15 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
   Alignment end = Alignment.topCenter;
 
   String supString(String body) {
-    if (body.length > 30) {
-      return body.substring(0, 27) + '...';
+    if (body.length > 25) {
+      return '${body.substring(0, 22)}...';
+    } else {
+      return body;
+    }
+  }
+  String supStringTitle(String body) {
+    if (body.length > 20) {
+      return '${body.substring(0, 18)}...';
     } else {
       return body;
     }
@@ -76,9 +84,9 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
         Radius.circular(45.0),
       )),
       backgroundColor: AppColors.mainColor,
-      insetPadding: const EdgeInsets.only(left: 70, right: 70),
+      insetPadding: EdgeInsets.only(left: 70, right: 70),
       content: SizedBox(
-          height: height * 0.07,
+          height: height * 0.01.h,
           child: Center(
               child: Column(
             children: [
@@ -147,7 +155,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               color: Colors.white,
               child: Text('Memo Night'.tr,
                   style: GoogleFonts.marckScript(
-                    fontSize: 35,
+                    fontSize: 30.sp,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w500,
                     color: AppColors.blue,
@@ -155,7 +163,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
             ),
             actions: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20),
+                padding: EdgeInsets.only(right: 1.w, left: 1.w),
                 child: Directionality(
                   textDirection: _selectedLang == 'en'
                       ? TextDirection.ltr
@@ -169,25 +177,27 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                           builder: (controllers) {
                             return DropdownButton(
                               dropdownColor: AppColors.mainColor,
-                              underline: const SizedBox(
-                                width: 70,
+                              underline: SizedBox(
+                                width: 70.h,
                               ),
-                              icon: Container(
-                                margin: const EdgeInsets.all(5),
-                                padding: const EdgeInsets.all(2),
-                                child: const Icon(
-                                  Icons.language,
-                                  color: AppColors.iconColor1,
-                                ),
+                              icon: const Icon(
+                                Icons.language,
+                                color: AppColors.iconColor1,
                               ),
-                              items: const [
+                              items: [
                                 DropdownMenuItem(
-                                  child: Text("En"),
                                   value: 'en',
+                                  child: Text(
+                                    "En",
+                                    style: TextStyle(fontSize: 12.sp),
+                                  ),
                                 ),
                                 DropdownMenuItem(
-                                  child: Text("Ar"),
                                   value: 'ar',
+                                  child: Text(
+                                    "Ar",
+                                    style: TextStyle(fontSize: 12.sp),
+                                  ),
                                 ),
                               ],
                               value: controllers.appLocale,
@@ -203,33 +213,32 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               ),
             ]),
         drawer: Drawer(
-          width: width * 0.6,
-          backgroundColor:AppColors.mainColor,
+          width: width * 0.15.w,
+          backgroundColor: AppColors.mainColor,
           child: ListView(
-            padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
                 decoration: const BoxDecoration(
-                  color: Color(0xFF0A0E21),
+
                 ),
                 child: Center(
-                    child: Text('Settings',
+                    child: Text('Settings'.tr,
                         style: GoogleFonts.marckScript(
-                          fontSize: 40,
+                          fontSize: 40.sp,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w500,
                           color: AppColors.blue,
                         ))),
               ),
               ListTile(
-                leading: const Icon(
+                leading:  Icon(
                   Icons.account_circle,
                   color: AppColors.iconColor1,
-                  size: 30,
+                  size: 25.sp,
                 ),
                 title: Text('Contact Us'.tr,
                     style: GoogleFonts.marckScript(
-                      fontSize: 30,
+                      fontSize:20.sp,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
                       color: AppColors.blue,
@@ -241,16 +250,16 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                   // Then close the drawer
                 },
               ),
-              const Divider(
+             const  Divider(
                 color: AppColors.textColor,
-                height: 20,
+               height: 1,
               ),
               ListTile(
-                leading: const Icon(Icons.logout,
-                    color: AppColors.iconColor1, size: 30),
+                leading:  Icon(Icons.logout,
+                    color: AppColors.iconColor1, size: 25.sp),
                 title: Text('Log Out'.tr,
                     style: GoogleFonts.marckScript(
-                      fontSize: 30,
+                      fontSize: 20.sp,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
                       color: AppColors.blue,
@@ -264,18 +273,18 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               ),
               const Divider(
                 color: AppColors.textColor,
-                height: 20,
+height: 1,
               ),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add, color: AppColors.blue),
             backgroundColor: Colors.indigo,
             onPressed: () {
               Get.lazyPut(() => AddNoteController());
               Get.to(const AddNote());
-            }),
+            },
+            child: const Icon(Icons.add, color: AppColors.blue)),
         body: AnimatedContainer(
           duration: const Duration(seconds: 2),
           onEnd: () {
@@ -299,7 +308,11 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
-                  return const Center(child: Text('Something went wrong'));
+                  return Center(
+                      child: Text(
+                    'Something went wrong'.tr,
+                    style: TextStyle(fontSize: 14.sp),
+                  ));
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -308,8 +321,8 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                 if (snapshot.data!.size == 0) {
                   return Center(
                     child: SizedBox(
-                      width: width * 0.33,
-                      height: height * 0.2,
+                      width: width * 0.05.h,
+                      height: height * 0.05.h,
                       child: Image.asset('images/assets/empty box.png'),
                     ),
                   );
@@ -338,20 +351,22 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                               curve: Curves.fastLinearToSlowEaseIn,
                               child: GestureDetector(
                                 onLongPress: () {
-
                                   changeLanguageAlertDialog(
                                       context, height, width, document.id);
                                 },
                                 child: Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 8, right: 8, bottom: 8, top: 8),
-                                  height: width / 4 + 40,
+                                  margin: EdgeInsets.only(
+                                      left: 2.w,
+                                      right: 2.w,
+                                      bottom: 1.h,
+                                      top: 1.h),
+                                  height: height * 0.02.h,
                                   decoration: BoxDecoration(
                                     color: AppColors.blue2,
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(2.h),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
+                                        color: Colors.black.withOpacity(0.2),
                                         blurRadius: 40,
                                         spreadRadius: 10,
                                       ),
@@ -363,15 +378,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                                           id: document.id,
                                           body: data['body'],
                                           title: data['title'],
-                                          time: d.year.toString() +
-                                              '/' +
-                                              d.month.toString() +
-                                              '/' +
-                                              d.day.toString() +
-                                              ' ' +
-                                              d.hour.toString() +
-                                              ':' +
-                                              d.minute.toString(),
+                                          time: '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
                                           imageUrl: data['imageUrl']);
                                       Get.to(NoteBodyPage(note: note));
                                     },
@@ -382,8 +389,6 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                                           Row(
                                             children: [
                                               Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 2, top: 2),
                                                 decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                         image: NetworkImage(
@@ -392,71 +397,65 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                                                         fit: BoxFit.fill),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            20)),
-                                                width: width * 0.33,
-                                                height: width / 3.3,
+                                                            2.h)),
+                                                width: width * 0.085.w,
+                                                height: height * 0.0175.h,
                                               ),
                                               SizedBox(
-                                                width: width / 20,
+                                                width: width / 18.w,
                                               ),
                                               Column(
                                                 //crossAxisAlignment: CrossAxisAlignment.end,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
+
                                                   Container(
-                                                    alignment:
-                                                        Alignment.topCenter,
+                                                    margin: EdgeInsets.only(
+                                                        left: 2.w,
+                                                        right: 2.w,
+                                                        bottom: 2.h,
+                                                        top: 1.h),
                                                     child: Text(
-                                                      supString(data['title']),
-                                                      style: const TextStyle(
-                                                          color: AppColors.white,
-                                                          fontSize: 22,
+                                                      supStringTitle(data['title']),
+                                                      style: TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                          fontSize: 17.sp,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    height: width / 17,
-                                                  ),
                                                   Container(
-                                                      alignment: Alignment.bottomRight,
+                                                      margin: EdgeInsets.only(
+                                                          left: 2.w,
+                                                          right: 2.w,
+                                                          bottom: 2.h,
+                                                          top: 1.h),
                                                       child: Text(
                                                         supString(data['body']),
-                                                        style: const TextStyle(
-                                                            color: AppColors.textColor,
-                                                            fontSize: 16,
-                                                            fontWeight: FontWeight.normal),
+                                                        style: TextStyle(
+                                                            color: AppColors
+                                                                .textColor,
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal),
                                                       )),
-                                                  SizedBox(
-                                                    height: width / 27,
-                                                  ),
                                                 ],
                                               )
                                             ],
                                           ),
-                                          Column(
-                                            children: [
-                                              Container(
-                                                  margin: const EdgeInsets.only(
-                                                      right: 10),
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: Text(
-                                                      d.year.toString() +
-                                                          '/' +
-                                                          d.month.toString() +
-                                                          '/' +
-                                                          d.day.toString() +
-                                                          ' ' +
-                                                          d.hour.toString() +
-                                                          ':' +
-                                                          d.minute.toString(),
-                                                      style: const TextStyle(
-                                                          color: AppColors.grey)))
-                                            ],
-                                          ),
+                                          Container(
+                                              margin:
+                                                  EdgeInsets.only(right: 1.5.w),
+                                              alignment: Alignment.bottomRight,
+                                              child: Text(
+                                                  '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
+                                                  style: const TextStyle(
+                                                      color: AppColors.grey))),
                                         ]),
                                   ),
                                 ),

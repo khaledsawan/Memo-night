@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:memo_night/Databease/model/note_model.dart';
-import 'package:memo_night/logic/Controllers/edit_note_controller.dart';
-import 'package:memo_night/views/screens/crud/edit_notes.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:sizer/sizer.dart';
+import '../../../Databease/model/note_model.dart';
+import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
+import 'edit_notes.dart';
 
 class NoteBodyPage extends StatefulWidget {
   final NoteModel note;
@@ -48,23 +49,22 @@ class _NoteBodyPageState extends State<NoteBodyPage> {
                   child: Text(
                     note.title,
                     style: GoogleFonts.marckScript(
-                      fontSize: 35,
+                      fontSize: 30.sp,
                       color: AppColors.blue,
                     ),
                   ),
                 ))),
         floatingActionButton: FloatingActionButton(
-            child: const Icon(
-              Icons.edit_note,
-              color: AppColors.blue,
-              size: 35,
-            ),
             backgroundColor: Colors.indigo,
             onPressed: () async {
-              Get.lazyPut(()=>EditNoteController());
-              Get.to(EditNote(
-                 note:note));
-            }),
+              Get.lazyPut(() => EditNoteController());
+              Get.to(EditNote(note: note));
+            },
+            child: Icon(
+              Icons.edit_note,
+              color: AppColors.blue,
+              size: 35.sp,
+            )),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -77,17 +77,16 @@ class _NoteBodyPageState extends State<NoteBodyPage> {
                           // await _download(imageUrl);
                         },
                         child: Container(
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.all(8),
-                          width: width * 0.9,
-                          height: height * 0.25,
+                          margin: EdgeInsets.fromLTRB(8.w, 1.h, 8.w, 0.1.h),
+                          width: width * 0.9.w,
+                          height: height * 0.03.h,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                   image: NetworkImage(note.imageUrl)),
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(2.h),
                               border:
-                                  Border.all(width: 1, color: AppColors.blue)),
+                                  Border.all(width:0.5.w, color: AppColors.blue)),
                         ),
                       ),
                       GestureDetector(
@@ -97,14 +96,14 @@ class _NoteBodyPageState extends State<NoteBodyPage> {
                           Get.snackbar('', 'text has copy');
                         },
                         child: Container(
-                          margin: const EdgeInsets.only(left: 4, top: 10),
+                          margin:  EdgeInsets.only(left: 4.w, top: 2.h),
                           child: Text(
                             note.body,
-                            maxLines: 500,
+                            maxLines: 10000,
                             style: GoogleFonts.robotoCondensed(
-                              fontSize: 22,
+                              fontSize: 16.sp,
                               wordSpacing: 3,
-                              height: 1.5,
+                              height: 0.16.h,
                               fontStyle: FontStyle.italic,
                               color: Colors.white70,
                             ),
@@ -116,7 +115,7 @@ class _NoteBodyPageState extends State<NoteBodyPage> {
                 ),
               ),
               Container(
-                  margin: const EdgeInsets.only(right: 10),
+                  margin:  EdgeInsets.only(right: 2.w),
                   alignment: Alignment.bottomRight,
                   child: Text(note.time.toString(),
                       style: const TextStyle(color: Colors.white))),

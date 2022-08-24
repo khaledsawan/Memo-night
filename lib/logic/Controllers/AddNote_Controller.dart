@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:memo_night/Databease/Services/Notes_services.dart';
+
+import '../../Databease/Services/Notes_services.dart';
 
 class AddNoteController extends GetxController {
   final insertProductForKey = GlobalKey<FormState>();

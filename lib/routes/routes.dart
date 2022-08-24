@@ -1,16 +1,14 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:memo_night/logic/bindings/AddNote_binding.dart';
-import 'package:memo_night/logic/bindings/EditNotes_binding.dart';
-import 'package:memo_night/logic/bindings/login_binding.dart';
-import 'package:memo_night/logic/bindings/register_binding.dart';
-import 'package:memo_night/views/screens/crud/edit_notes.dart';
-import 'package:memo_night/views/screens/auth/login.dart';
-import 'package:memo_night/views/screens/auth/signup.dart';
-import 'package:memo_night/views/screens/splach_screen/splash_screen.dart';
+import '../logic/bindings/AddNote_binding.dart';
+import '../logic/bindings/login_binding.dart';
+import '../logic/bindings/register_binding.dart';
+import '../views/screens/auth/login.dart';
+import '../views/screens/auth/signup.dart';
 import '../views/screens/contact_us/about_us_page.dart';
 import '../views/screens/contact_us/about_us_page.dart';
+import '../views/screens/crud/add_note.dart';
 import '../views/screens/crud/index.dart';
-import 'package:memo_night/views/screens/crud/add_note.dart';
+import '../views/screens/splach_screen/splash_screen.dart';
 
 class AppRoutes {
   static const addnote = Routes.add;

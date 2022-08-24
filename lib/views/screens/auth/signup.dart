@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memo_night/logic/Controllers/Register_Controller.dart';
-import 'package:memo_night/views/screens/auth/login.dart';
+import 'package:sizer/sizer.dart';
+import '../../../logic/Controllers/Register_Controller.dart';
 import '../../../routes/routes.dart';
 import 'dart:async';
 
@@ -81,10 +81,10 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
               SizedBox(height: height*0.1,),
               Center(
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding:  EdgeInsets.fromLTRB(0.h, 1.h, 10, 0),
                   child: Text(
                     'SignUp'.tr,
-                    style: GoogleFonts.marckScript(fontSize: 75,
+                    style: GoogleFonts.marckScript(fontSize: 50.sp,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xDA00BBFF),)
@@ -95,12 +95,10 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: height * 0.06,
-                      ),
+
                       Center(
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding:  EdgeInsets.only(left: 1.h,right: 1.h,top: 5.h,bottom: 1.h),
                           child: TextFormField(
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: controller.nameController,
@@ -126,7 +124,7 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding:  EdgeInsets.only(left: 1.h,right: 1.h,top: 1.h,bottom: 1.h),
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: controller.emailController,
@@ -151,9 +149,8 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        margin: const EdgeInsets.only(
-                            left: 0, top: 0, right: 0, bottom: 10.0),
+                        padding:  EdgeInsets.only(left: 1.h,right: 1.h,top: 1.h,bottom: 1.h),
+
                         child: TextFormField(
                           obscureText: true,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -179,9 +176,8 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        margin: const EdgeInsets.only(
-                            left: 0, top: 0, right: 0, bottom: 10.0),
+                        padding:  EdgeInsets.only(left: 1.h,right: 1.h,top: 1.h,bottom: 1.h),
+
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onSaved: (v) {
@@ -205,55 +201,51 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                       SizedBox(
+                        height: 3.h,
                       ),
                       Obx(
                             () => controller.isLoading.value == true
                             ? const Center(child: CircularProgressIndicator())
                             : const Text(""),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+
                       GestureDetector(
                         onTap: () async {
                           await controller.register();
                         },
                         child: Container(
-                          width: width * 0.4,
-                          height: height * 0.075,
+                          width: width * 0.05.h,
+                          height: height * 0.009.h,
                           decoration: BoxDecoration(
                               color: const Color(0xFF7423A8),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(1.5.h),
                               border: Border.all(
                                   width: 1, color: const Color(0xDA00BBFF))),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
                               'Register',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 15.sp),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+
                       Container(
-                        padding: const EdgeInsets.all(8),
+                        padding:   EdgeInsets.only(left: 1.w,right: 1.w,top: 1.h,bottom: 1.h),
                         alignment: AlignmentDirectional.topStart,
                         width: width,
                         child: Center(
                           child: RichText(
                             text: TextSpan(
                                 text: 'You have Account?',
-                                style: const TextStyle(
-                                    color: Color(0xFF7423A8), fontSize: 18),
+                                style:  TextStyle(
+                                    color: Color(0xFF7423A8), fontSize: 14.sp),
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: ' Sign In',
-                                      style: const TextStyle(
-                                          color: Colors.blueAccent, fontSize: 18),
+                                      style:  TextStyle(
+                                          color: Colors.blueAccent, fontSize: 16.sp),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           Get.toNamed(AppRoutes.login);
@@ -263,27 +255,26 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(10, 15, 10, 10),
                         alignment: Alignment.center,
                         child: Text(
                           'OR'.tr,
-                          style: const TextStyle(
-                            fontSize: 20,
+                          style:  TextStyle(
+                            fontSize: 16.sp,
                             color:Colors.white,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(5),
-                        margin: const EdgeInsets.all(5),
+                        padding: EdgeInsets.fromLTRB(1.w, 0.h, 1.w, 1.h),
+
                         alignment: Alignment.center,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              width: 50,
-                              height: 55,
+                              width: 15.w,
+                              height: 15.h,
                               margin: const EdgeInsets.all(4),
                               child: IconButton(
                                 icon: Image.asset('images/assets/icons8google96.png'),
@@ -295,9 +286,9 @@ class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
                               ),
                             ),
                             Container(
-                              width: 50,
-                              height: 55,
-                              margin: const EdgeInsets.all(4),
+                              width: 15.w,
+                              height: 15.h,
+                              margin: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                               child: IconButton(
                                 icon: Image.asset('images/assets/facebook96.jpg'),
                                 color: Colors.white,

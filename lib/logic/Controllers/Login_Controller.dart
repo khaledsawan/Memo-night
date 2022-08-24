@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
-import 'package:memo_night/Databease/Services/auth_services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:memo_night/routes/routes.dart';
+
+import '../../Databease/Services/auth_services.dart';
+import '../../routes/routes.dart';
 import '../../views/screens/crud/index.dart';
 
 class LoginController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -11,7 +12,6 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
   final loginForKey = GlobalKey<FormState>();
   late TextEditingController emailController, passwordController;
   String email = '', password = '';
-  final storage = const FlutterSecureStorage();
 
   String? validateEmail(String value) {
     if (!GetUtils.isEmail(value)) {
@@ -54,7 +54,6 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
       UserCredential data = await AuthService.signInWithGoogle();
       if (!data.isNull) {
         Get.offAll(() => Index());
-        Get.snackbar('successful', '');
       } else {
         Get.dialog(const Text('filed signup'));
       }
@@ -68,14 +67,16 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
   doLoginFacebook() async {
     isLoading(true);
     try {
-      var data = await AuthService.signInWithGoogle();
-      if (data != null) {
-        Get.off(() => const Index());
-        Get.dialog(const Text('successful'));
-      } else {
-        Get.dialog(const Text('filed signup'));
+      Future<UserCredential> signInWithFacebook() async {
+        // Trigger the sign-in flow
+        final LoginResult loginResult = await FacebookAuth.instance.login();
+
+        // Create a credential from the access token
+        final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+        // Once signed in, return the UserCredential
+        return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
       }
-      print('data.credential');
     } finally {
       isLoading(false);
     }

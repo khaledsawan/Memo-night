@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
-import 'package:memo_night/Databease/Services/auth_services.dart';
-import 'package:memo_night/logic/Controllers/Login_Controller.dart';
-import 'package:memo_night/routes/routes.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../Databease/Services/auth_services.dart';
+import '../../../logic/Controllers/Login_Controller.dart';
+import '../../../routes/routes.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -37,14 +39,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller.emailController=emailController;
-    controller.passwordController=passwordController;
+    controller.emailController = emailController;
+    controller.passwordController = passwordController;
     Timer(
       const Duration(microseconds: 0),
       () {
         setState(
           () {
-            bottomColor =const Color(0xff33267C);
+            bottomColor = const Color(0xff33267C);
           },
         );
       },
@@ -65,7 +67,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
 
     return Scaffold(
       body: AnimatedContainer(
-        duration:const Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         onEnd: () {
           setState(
             () {
@@ -97,19 +99,21 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 children: <Widget>[
                   Center(
                     child: Container(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Text(
-                        'Login'.tr,
-                        style:  GoogleFonts.marckScript(fontSize: 75,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xDA00BBFF),)
-                      ),
+                      padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 0.1.h),
+                      child: Text('Login'.tr,
+                          style: GoogleFonts.marckScript(
+                            fontSize: 75.sp,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xDA00BBFF),
+                          )),
                     ),
                   ),
-                  SizedBox(height: height*0.1,),
+                  SizedBox(
+                    height: height.h * 0.01,
+                  ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(2.h),
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (v) {
@@ -134,9 +138,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    margin: const EdgeInsets.only(
-                        left: 0, top: 0, right: 0, bottom: 6.0),
+                    padding: EdgeInsets.all(2.h),
                     child: TextFormField(
                       obscureText: true,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -156,68 +158,69 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             color: Color(0xFF7423A8),
                           ),
                         ),
+                        labelStyle: TextStyle(fontSize: 14.sp),
                         labelText: 'Password'.tr,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  // SizedBox(
+                  //   // height: 1.h,
+                  // ),
                   // TextButton(
                   //  // onPressed: _resetPassword(context),
                   //
                   //   onPressed: () {  },
                   //   child: const Text('Forgot password?'),
                   // ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
                   Obx(
                     () => controller.isLoading.value == true
                         ? const Center(child: CircularProgressIndicator())
                         : const Text(""),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
                   GestureDetector(
                     onTap: () async {
                       await controller.doLoginEmailPassword();
                     },
                     child: Container(
-                      width: width * 0.4,
-                      height: height * 0.075,
+                      width: width * 0.05.h,
+                      height: height * 0.009.h,
                       decoration: BoxDecoration(
                           color: const Color(0xFF7423A8),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(1.5.h),
                           border: Border.all(
                               width: 1, color: const Color(0xDA00BBFF))),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Sign In',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.fromLTRB(4.w,2.h, 4.w, 4.h),
                     alignment: AlignmentDirectional.topStart,
                     width: width,
                     child: Center(
                       child: RichText(
                         text: TextSpan(
                             text: 'Don\'t have an account?',
-                            style: const TextStyle(
-                                color: Color(0xFF7423A8), fontSize: 18),
+                            style: TextStyle(
+                                color: const Color(0xFF7423A8),
+                                fontSize: 14.sp),
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Sign up',
-                                  style: const TextStyle(
-                                      color: Colors.blueAccent, fontSize: 18),
+                                  style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontSize: 16.sp),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       Get.toNamed(AppRoutes.signup);
@@ -227,27 +230,26 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+                    margin: EdgeInsets.fromLTRB(1.w, 0.h, 1.w, 1.h),
                     alignment: Alignment.center,
                     child: Text(
                       'OR'.tr,
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: 16.sp,
                         fontStyle: FontStyle.italic,
                       ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(5),
+                    padding: EdgeInsets.fromLTRB(1.w, 0.h, 1.w, 1.h),
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          width: 50,
-                          height: 55,
-                          margin: const EdgeInsets.all(4),
+                          width: 15.w,
+                          height: 15.h,
+                          margin: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                           child: IconButton(
                             icon:
                                 Image.asset('images/assets/icons8google96.png'),
@@ -259,9 +261,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           ),
                         ),
                         Container(
-                          width: 50,
-                          height: 55,
-                          margin: const EdgeInsets.all(4),
+                          width: 15.w,
+                          height: 15.h,
+                          margin: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                           child: IconButton(
                             icon: Image.asset('images/assets/facebook96.jpg'),
                             color: Colors.white,

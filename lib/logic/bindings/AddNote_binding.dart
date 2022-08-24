@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:memo_night/logic/Controllers/AddNote_Controller.dart';
+
+import '../Controllers/AddNote_Controller.dart';
 
 
 class AddNoteBinding extends Bindings {
