@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import '../../../logic/Controllers/AddNote_Controller.dart';
 import '../../../utils/colors.dart';
+import 'package:file_picker/file_picker.dart';
 
 class AddNoteW extends StatefulWidget {
   const AddNoteW({Key? key}) : super(key: key);
@@ -17,10 +19,12 @@ class AddNoteW extends StatefulWidget {
 
 class _AddNoteWState extends State<AddNoteW> {
   final AddNoteController controller = Get.find();
+  PickedFile? image;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    bool deviceType = SizerUtil.deviceType == DeviceType.web;
     if (!controller.isLoad) {
       return Scaffold(
         appBar: AppBar(
@@ -44,68 +48,46 @@ class _AddNoteWState extends State<AddNoteW> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            final imagePicker = ImagePicker();
-                            controller.image = await imagePicker.getImage(
-                                source: ImageSource.gallery);
-                            controller.file = File(controller.image!.path);
-                            if (controller.image != null) {
-                              setState(() {
-                                controller.imageName =
-                                    basename(controller.image!.path);
-                              });
-                              Navigator.of(context).pop();
+                            if (!deviceType) {
+                              final imagePicker = ImagePicker();
+                              image = await imagePicker.getImage(
+                                  source: ImageSource.gallery);
+                              if (image != null) {
+                                controller.file = File(image!.path);
+                                setState(() {
+                                  controller.imageName = basename(image!.path);
+                                });
+                                Navigator.of(context).pop();
+                              } else {
+                                Get.snackbar('Error', 'no image selected');
+                              }
                             } else {
-                              Get.snackbar('Error', 'no image selected');
+                              var picked = await FilePicker.platform.pickFiles(
+                                  type: FileType.image, allowMultiple: false);
+                              if (picked != null) {
+                                Uint8List? fileBytes = picked.files.first.bytes;
+                                String fileName = picked.files.first.name;
+                                controller.uint8list = fileBytes;
+                                setState(() {
+                                  controller.imageName = fileName;
+                                });
+                                Navigator.of(context).pop();
+                              } else {
+                                Get.snackbar('Error', 'no image selected');
+                              }
                             }
                           },
                           child: Container(
-                              width: double.infinity,
                               padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                               child: Row(
-                                children: [
-                                  const Icon(
+                                children: const [
+                                  Icon(
                                     Icons.photo_outlined,
-                                    size: 24,
-                                    color: AppColors.blue,
+                                    size: 22,
                                   ),
-                                  SizedBox(width: 1.w),
-                                  const Text(
+                                  SizedBox(width: 10),
+                                  Text(
                                     "From Gallery",
-                                    style: TextStyle(fontSize: 18),
-                                  )
-                                ],
-                              )),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            final imagePicker = ImagePicker();
-                            controller.image = await imagePicker.getImage(
-                                source: ImageSource.camera);
-                            controller.file = File(controller.image!.path);
-                            if (controller.image != null) {
-                              setState(() {
-                                controller.imageName =
-                                    basename(controller.image!.path);
-                              });
-
-                              Navigator.of(context).pop();
-                            } else {
-                              Get.snackbar('Error', 'no image selected');
-                            }
-                          },
-                          child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.camera,
-                                    size: 24,
-                                    color: AppColors.blue,
-                                  ),
-                                  SizedBox(width: 1.w),
-                                  const Text(
-                                    "From Camera",
                                     style: TextStyle(fontSize: 18),
                                   )
                                 ],
@@ -161,8 +143,10 @@ class _AddNoteWState extends State<AddNoteW> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Form(
-          child: ListView(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 margin: EdgeInsets.only(
@@ -176,7 +160,7 @@ class _AddNoteWState extends State<AddNoteW> {
                     controller.titleController != v;
                   },
                   style: GoogleFonts.aBeeZee(
-                    fontSize: 20,
+                    fontSize: 22,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w500,
                     color: AppColors.white,
@@ -199,7 +183,7 @@ class _AddNoteWState extends State<AddNoteW> {
               Container(
                 padding: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 0.h),
                 margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 2.h),
-                height: height - height * 0.3,
+                height: height - height * 0.2,
                 child: TextFormField(
                   maxLines: 10000,
                   onSaved: (v) {
@@ -212,8 +196,8 @@ class _AddNoteWState extends State<AddNoteW> {
                   ? Container()
                   : Center(
                       child: Container(
-                          width: width * 0.7,
-                          height: height * 0.35,
+                          width: width * 0.55,
+                          height: height * 0.4,
                           margin: const EdgeInsets.only(
                               bottom: 20, left: 20, right: 20),
                           child: Stack(
@@ -221,18 +205,17 @@ class _AddNoteWState extends State<AddNoteW> {
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: AppColors.iconColor2,
-                                        width: 1.w),
-                                    borderRadius: BorderRadius.circular(2.h),
+                                        color: AppColors.iconColor2, width: 1),
+                                    borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: FileImage(
-                                          File(controller.image!.path),
+                                        image: MemoryImage(
+                                          controller.uint8list!,
                                         ))),
                               ),
                               Positioned(
-                                  left: width - 15.w,
-                                  top: 2.h,
+                                  left: width * 0.55 - 50,
+                                  top: 20,
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
@@ -240,10 +223,10 @@ class _AddNoteWState extends State<AddNoteW> {
                                       });
                                       controller.clearImage();
                                     },
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.clear,
                                       color: AppColors.red,
-                                      size: 6.h,
+                                      size: 30,
                                     ),
                                   ))
                             ],
@@ -258,7 +241,6 @@ class _AddNoteWState extends State<AddNoteW> {
           appBar: AppBar(
             backgroundColor: AppColors.mainColor,
             automaticallyImplyLeading: true,
-
             title: Text('Add Note'.tr,
                 style: GoogleFonts.marckScript(
                   fontSize: 43,
@@ -277,7 +259,6 @@ class _AddNoteWState extends State<AddNoteW> {
             centerTitle: true,
             toolbarHeight: 60.2,
             toolbarOpacity: 0.8,
-
           ),
           body: const Center(
               child: CircularProgressIndicator(

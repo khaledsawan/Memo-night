@@ -1,7 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mnv2/views/mobile_view/auth/login_m.dart';
-import 'package:sizer/sizer.dart';
-
 import '../../mobile_view/auth/signup_m.dart';
 import '../../web_view/auth/signup_w.dart';
 

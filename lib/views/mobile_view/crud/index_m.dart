@@ -13,8 +13,7 @@ import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../logic/Controllers/app_language.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
-import 'add_note_m.dart';
-import 'note_body_page.dart';
+import '../../View/crud/note_body_page.dart';
 
 class IndexM extends StatefulWidget {
   const IndexM({Key? key}) : super(key: key);
@@ -85,7 +84,7 @@ class _IndexMState extends State<IndexM> with TickerProviderStateMixin {
         Radius.circular(45.0),
       )),
       backgroundColor: AppColors.mainColor,
-      insetPadding: EdgeInsets.only(left: 70, right: 70),
+      insetPadding:const EdgeInsets.only(left: 70, right: 70),
       content: SizedBox(
           height: height * 0.01.h,
           child: Center(

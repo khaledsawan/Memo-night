@@ -240,7 +240,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                             text: TextSpan(
                                 text: 'You have Account?',
                                 style:  TextStyle(
-                                    color: Color(0xFF7423A8), fontSize: 14.sp),
+                                    color: const Color(0xFF7423A8), fontSize: 14.sp),
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: ' Sign In',

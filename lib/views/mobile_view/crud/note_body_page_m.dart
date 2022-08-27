@@ -10,21 +10,21 @@ import 'package:sizer/sizer.dart';
 import '../../../Database/model/note_model.dart';
 import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
-import 'edit_notes.dart';
+import '../../View/crud/edit_note.dart';
 
-class NoteBodyPage extends StatefulWidget {
+class NoteBodyPageM extends StatefulWidget {
   final NoteModel note;
 
-  const NoteBodyPage({Key? key, required this.note}) : super(key: key);
+  const NoteBodyPageM({Key? key, required this.note}) : super(key: key);
 
   @override
-  _NoteBodyPageState createState() => _NoteBodyPageState(note: this.note);
+  _NoteBodyPageMState createState() => _NoteBodyPageMState(note: this.note);
 }
 
-class _NoteBodyPageState extends State<NoteBodyPage> {
+class _NoteBodyPageMState extends State<NoteBodyPageM> {
   late NoteModel note;
 
-  _NoteBodyPageState({required this.note});
+  _NoteBodyPageMState({required this.note});
 
   Future<void> _download(String imageUrl) async {
     final response = await http.get(Uri.parse(imageUrl));
@@ -93,17 +93,33 @@ class _NoteBodyPageState extends State<NoteBodyPage> {
                         onLongPress: () {
                           SelectableText(note.body);
                           Clipboard.setData(ClipboardData(text: note.body));
-                          Get.snackbar('', 'text has copy');
+                          Get.snackbar('', '',messageText: Text('text has been copy' ,style: GoogleFonts.marckScript(
+                            fontSize: 22,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),),
+                            backgroundColor: AppColors.mainColor2,
+                            titleText: Text(
+                              'copy',
+                              style: GoogleFonts.marckScript(
+                                fontSize: 28,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.white,
+                              ),
+                            ),);
                         },
                         child: Container(
-                          margin:  EdgeInsets.only(left: 4.w, top: 2.h),
+                          width: width,
+                          margin: EdgeInsets.only(left: 1.w, top: 2.h),
                           child: Text(
                             note.body,
                             maxLines: 10000,
-                            style: GoogleFonts.robotoCondensed(
-                              fontSize: 16.sp,
+                            style: GoogleFonts.lato(
+                              fontSize: 18,
                               wordSpacing: 3,
-                              height: 0.16.h,
+                              height: 1.4,
                               fontStyle: FontStyle.italic,
                               color: Colors.white70,
                             ),

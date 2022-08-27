@@ -17,6 +17,8 @@ class AddNoteM extends StatefulWidget {
 
 class _AddNoteMState extends State<AddNoteM> {
   final AddNoteController controller = Get.find();
+  PickedFile? image;
+
   showBottomSheet(context) {
     double height = MediaQuery.of(context).size.height;
     return showModalBottomSheet(
@@ -36,12 +38,12 @@ class _AddNoteMState extends State<AddNoteM> {
                 InkWell(
                   onTap: () async {
                     final _imagePicker = ImagePicker();
-                    controller.image = await _imagePicker.getImage(
+                    image= await _imagePicker.getImage(
                         source: ImageSource.gallery);
-                    controller.file = File(controller.image!.path);
-                    if (controller.image != null) {
+                    if (image != null) {
+                      controller.file = File(image!.path);
                       setState(() {
-                        controller.imageName = basename(controller.image!.path);
+                        controller.imageName = basename(image!.path);
                       });
                       Navigator.of(context).pop();
                     } else {
@@ -68,12 +70,13 @@ class _AddNoteMState extends State<AddNoteM> {
                 InkWell(
                   onTap: () async {
                     final _imagePicker = ImagePicker();
-                    controller.image =
+                    PickedFile? image =
                         await _imagePicker.getImage(source: ImageSource.camera);
-                    controller.file = File(controller.image!.path);
-                    if (controller.image != null) {
+                    if (image != null) {
+                      controller.file = File(image.path);
+
                       setState(() {
-                        controller.imageName = basename(controller.image!.path);
+                        controller.imageName = basename(image.path);
                       });
 
                       Navigator.of(context).pop();
@@ -215,7 +218,7 @@ class _AddNoteMState extends State<AddNoteM> {
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: FileImage(
-                                            File(controller.image!.path),
+                                            File(image!.path),
                                           ))),
                                 ),
                                 Positioned(

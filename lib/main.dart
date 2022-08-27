@@ -5,11 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mnv2/routes/routes.dart';
 import 'package:mnv2/utils/langs/translations.dart';
-import 'package:mnv2/views/mobile_view/auth/signup_m.dart';
-import 'package:mnv2/views/web_view/auth/login_w.dart';
-import 'package:mnv2/views/web_view/auth/signup_w.dart';
-import 'package:mnv2/views/web_view/crud/add_note_w.dart';
-import 'package:mnv2/views/web_view/crud/index_w.dart';
 import 'package:sizer/sizer.dart';
 import 'firebase_options.dart';
 import 'init/init.dart';
@@ -41,7 +36,7 @@ class MyApp extends StatelessWidget {
     }
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return GetMaterialApp(
+           return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialBinding: AuthBinding(),
           theme: ThemeData.dark().copyWith(
@@ -63,7 +58,8 @@ class MyApp extends StatelessWidget {
           ],
           getPages: AppRoutes.routes,
           initialRoute: AppRoutes.splashscreen,
-         // home:  const AddNoteW(),
+
+          // home:   AddNoteW(),
         );
       },
     );

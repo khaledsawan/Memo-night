@@ -5,15 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mnv2/views/View/auth/login.dart';
 import 'package:mnv2/views/View/crud/index.dart';
 import '../../../utils/colors.dart';
-import '../auth/login_m.dart';
-import '../crud/index_m.dart';
 
-class splachScreen extends StatefulWidget {
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
-  _splachScreenState createState() => _splachScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _splachScreenState extends State<splachScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   bool _a = false;
 
   @override
@@ -34,8 +35,8 @@ class _splachScreenState extends State<splachScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor:AppColors.black,
@@ -44,8 +45,8 @@ class _splachScreenState extends State<splachScreen> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 2500),
             curve: Curves.fastLinearToSlowEaseIn,
-            width: _a ? _width : 0,
-            height: _height,
+            width: _a ? width : 0,
+            height: height,
             color: AppColors.mainColor,
           ),
             Center(

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
-
 import '../../Database/Services/auth_services.dart';
 import '../../routes/routes.dart';
 import '../../views/mobile_view/crud/index_m.dart';

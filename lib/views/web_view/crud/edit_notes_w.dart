@@ -7,18 +7,18 @@ import '../../../Database/model/note_model.dart';
 import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
 
-class EditNote extends StatefulWidget {
- final  NoteModel note;
+class EditNoteW extends StatefulWidget {
+  final NoteModel note;
 
-  const EditNote({Key? key, required this.note}) : super(key: key);
+  const EditNoteW({Key? key, required this.note}) : super(key: key);
 
   @override
-  _EditNoteState createState() => _EditNoteState(note: note);
+  _EditNoteWState createState() => _EditNoteWState(note: note);
 }
 
-class _EditNoteState extends State<EditNote> {
+class _EditNoteWState extends State<EditNoteW> {
   late NoteModel note;
-  _EditNoteState({required this.note});
+  _EditNoteWState({required this.note});
   EditNoteController controller = Get.find();
   @override
   initState() {
@@ -35,31 +35,54 @@ class _EditNoteState extends State<EditNote> {
       return !controller.isLoading
           ? Scaffold(
               appBar: AppBar(
-                  backgroundColor: AppColors.mainColor,
-                  title: Title(
-                      title: '',
+                backgroundColor: AppColors.mainColor,
+                automaticallyImplyLeading: true,
+                actions: <Widget>[
+                  SizedBox(
+                    width: 1.w,
+                  ), //IconButton
+                  IconButton(
+                    icon: const Icon(
+                      Icons.save,
                       color: AppColors.white,
-                      child: Center(
-                        child: Text(
-                          'Update note',
-                          style: GoogleFonts.marckScript(
-                            fontSize: 30.sp,
-                            color: AppColors.blue,
-                          ),
-                        ),
-                      ))),
-              floatingActionButton: FloatingActionButton(
-                  child:  Icon(
-                    Icons.update,
-                    color: AppColors.blue,
-                    size: 30.sp,
+                      size: 30,
+                    ),
+                    tooltip: 'save',
+                    onPressed: () async {
+                      await controller.updateNote(note);
+                    },
                   ),
-                  backgroundColor: Colors.indigo,
-                  onPressed: () async {
-                    controller.updateNote(note);
-                  }),
+                  SizedBox(
+                    width: 1.w,
+                  ), //IconB//IconButton
+                ],
+                title: Text('Edit Note',
+                    style: GoogleFonts.marckScript(
+                      fontSize: 55,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.blue,
+                    )),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20)),
+                ),
+                elevation: 50.0,
+                systemOverlayStyle: SystemUiOverlayStyle.light,
+                titleSpacing: 00.0,
+                centerTitle: true,
+                toolbarHeight: 60.2,
+                toolbarOpacity: 0.8,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Expanded(
                       child: SingleChildScrollView(
@@ -70,17 +93,16 @@ class _EditNoteState extends State<EditNote> {
                                 // await _download(imageUrl);
                               },
                               child: Container(
-                                margin: EdgeInsets.fromLTRB(8.w, 1.h,8.w, 0.1.h),
-                                padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 0.1.h),
-                                width: width * 0.9.w,
+                                margin: EdgeInsets.fromLTRB(2.w, 1.h, 2.w, 0.2.h),
+                                width: width * 0.4,
                                 height: height * 0.03.h,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(note.imageUrl)),
                                     borderRadius: BorderRadius.circular(2.h),
-                                    border: Border.all(
-                                        width: 0.5.w, color: AppColors.blue)),
+                                    border:
+                                    Border.all(width: 2, color: AppColors.blue)),
                               ),
                             ),
                             GestureDetector(
@@ -91,15 +113,16 @@ class _EditNoteState extends State<EditNote> {
                                 Get.snackbar('', 'text has copy');
                               },
                               child: Container(
-                                margin: EdgeInsets.fromLTRB(4.w, 1.h,4.w, 0.h),
+                                margin: EdgeInsets.fromLTRB(1.w, 0, 2.w, 0.h),
                                 child: TextFormField(
                                   controller: controller.titleController,
-                                  style: GoogleFonts.robotoCondensed(
-                                    fontSize: 24.sp,
+                                  maxLines: 3,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 22,
                                     wordSpacing: 3,
-                                    height: 0.15.h,
+                                    height: 1.4,
                                     fontStyle: FontStyle.italic,
-                                    color: AppColors.blue,
+                                    color: Colors.white70,
                                   ),
                                 ),
                               ),
@@ -112,16 +135,16 @@ class _EditNoteState extends State<EditNote> {
                                 Get.snackbar('', 'text has copy');
                               },
                               child: Container(
-                                margin:  EdgeInsets.only(left: 2.w, top: 1.5.h),
+                                margin: EdgeInsets.only(left:1.w, top: 1.5.h),
                                 child: TextFormField(
                                   controller: controller.bodyController,
                                   maxLines: 10000,
-                                  style: GoogleFonts.robotoCondensed(
-                                    fontSize: 16.sp,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 18,
                                     wordSpacing: 3,
-                                    height: 0.15.h,
+                                    height: 1.4,
                                     fontStyle: FontStyle.italic,
-                                    color: AppColors.white70,
+                                    color: Colors.white70,
                                   ),
                                 ),
                               ),
@@ -131,7 +154,7 @@ class _EditNoteState extends State<EditNote> {
                       ),
                     ),
                     Container(
-                        margin:  EdgeInsets.only(right: 2.w),
+                        margin: EdgeInsets.only(right: 2.w),
                         alignment: Alignment.bottomRight,
                         child: Text(note.time.toString(),
                             style: const TextStyle(color: AppColors.white70))),

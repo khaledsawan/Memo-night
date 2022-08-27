@@ -1,4 +1,3 @@
-import 'dart:io';
 
 class NoteModel {
   late String id;

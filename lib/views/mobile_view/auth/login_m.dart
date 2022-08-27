@@ -129,11 +129,11 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                         labelStyle: TextStyle(fontSize: 14.sp),
                         prefixIcon:  Padding(
                           padding:
-                              EdgeInsets.only(), // add padding to adjust icon
+                              const EdgeInsets.only(), // add padding to adjust icon
                           child: Icon(
                             size: 20.sp,
                             Icons.mail_outline,
-                            color: Color(0xFF7423A8),
+                            color: const Color(0xFF7423A8),
                           ),
                         ),
                       ),
@@ -154,11 +154,11 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         prefixIcon:  Padding(
-                          padding: EdgeInsets.only(),
+                          padding: const EdgeInsets.only(),
                           child: Icon(
 
                             Icons.lock_open,
-                            color: Color(0xFF7423A8),
+                            color: const Color(0xFF7423A8),
                             size: 20.sp,
                           ),
                         ),

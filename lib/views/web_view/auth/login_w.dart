@@ -132,11 +132,11 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                           labelStyle: TextStyle(fontSize: 4.sp),
                           prefixIcon: Padding(
                             padding:
-                                EdgeInsets.only(), // add padding to adjust icon
+                                const EdgeInsets.only(), // add padding to adjust icon
                             child: Icon(
                               size: 6.sp,
                               Icons.mail_outline,
-                              color: Color(0xFF7423A8),
+                              color: const Color(0xFF7423A8),
                             ),
                           ),
                         ),
@@ -157,10 +157,10 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           prefixIcon: Padding(
-                            padding: EdgeInsets.only(),
+                            padding: const EdgeInsets.only(),
                             child: Icon(
                               Icons.lock_open,
-                              color: Color(0xFF7423A8),
+                              color: const Color(0xFF7423A8),
                               size: 6.sp,
                             ),
                           ),
@@ -205,7 +205,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                         child: Center(
                           child: Text('Sign In',
                               style: GoogleFonts.robotoCondensed(
-                                fontSize: 4.sp,
+                                fontSize: 5.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
                                 color: const Color(0xDA00BBFF),
@@ -223,13 +223,13 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                           text: TextSpan(
                               text: 'Don\'t have an account?',
                               style: TextStyle(
-                                  color: AppColors.grey, fontSize: 3.sp),
+                                  color: AppColors.grey, fontSize: 4.2.sp),
                               children: <TextSpan>[
                                 TextSpan(
                                     text: ' Sign up',
                                     style: TextStyle(
                                         color: Colors.blueAccent,
-                                        fontSize: 5.sp),
+                                        fontSize: 5.2.sp),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Get.toNamed(AppRoutes.signup);

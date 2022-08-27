@@ -13,8 +13,8 @@ import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../logic/Controllers/app_language.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
-import '../../mobile_view/crud/add_note_m.dart';
-import '../../mobile_view/crud/note_body_page.dart';
+import '../../View/crud/note_body_page.dart';
+
 
 class IndexW extends StatefulWidget {
   const IndexW({Key? key}) : super(key: key);
@@ -45,9 +45,9 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
   Alignment begin = Alignment.bottomCenter;
   Alignment end = Alignment.topCenter;
 
-  String supString(String body,double width,double height) {
+  String supString(String body, double width, double height) {
     if (body.length > 100) {
-      return '${body.substring(0,body.length)}...';
+      return '${body.substring(0, body.length)}...';
     } else {
       return body;
     }
@@ -89,53 +89,56 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
       insetPadding: const EdgeInsets.only(left: 70, right: 70),
       content: SizedBox(
           height: height * 0.01.h,
-          child: Center(
-              child: Column(
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  CollectionReference note =
-                      FirebaseFirestore.instance.collection('Notes');
-                  await note
-                      .doc(id)
-                      .delete()
-                      .then((value) => const GetSnackBar(
-                            title: '',
-                            message: 'note deleted successfully',
-                          ))
-                      .catchError((error) => GetSnackBar(
-                            title: 'Error',
-                            message: error.toString(),
-                          ));
-                  Navigator.of(context).pop();
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.delete_forever_outlined,
-                      size: 40,
-                      color: AppColors.red,
-                    ),
-                    Text(
-                      'Delete Note',
-                      style: GoogleFonts.marckScript(
-                        fontSize: 35,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xDA00BBFF),
+          child: SingleChildScrollView(
+            child: Center(
+                child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.of(context).pop();
+                    CollectionReference note =
+                        FirebaseFirestore.instance.collection('Notes');
+                    await note
+                        .doc(id)
+                        .delete()
+                        .then((value) => const GetSnackBar(
+                              title: '',
+                              message: 'note deleted successfully',
+                            ))
+                        .catchError((error) => GetSnackBar(
+                              title: 'Error',
+                              message: error.toString(),
+                            ));
+                  //  Navigator.of(context).pop();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Icon(
+                        Icons.delete,
+                        size: 30,
+                        color: AppColors.red,
                       ),
-                    )
-                  ],
+                      Text(
+                        'Delete Note',
+                        style: GoogleFonts.marckScript(
+                          fontSize: 24,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xDA00BBFF),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 4, top: 2),
-                height: 1,
-                color: AppColors.blue,
-              ),
-            ],
-          ))),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 4, top: 4),
+                  height: 1,
+                  color: AppColors.blue,
+                ),
+              ],
+            )),
+          )),
     );
     showDialog(
       context: context,
@@ -226,8 +229,8 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     Container(
-                      width: 75,
-                      height: 75,
+                      width: 80,
+                      height: 80,
                       alignment: Alignment.center,
                       child: Image.asset('images/assets/2040510.png'),
                     ),
@@ -409,74 +412,92 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
                                     },
                                     child: SingleChildScrollView(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                        Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  top: 2.h,
-                                                  left: 1.w,
-                                                  right: 1.w),
-                                              decoration: BoxDecoration(
-                                                  image:  DecorationImage(
-                                                      image: NetworkImage(
-                                                        data['imageUrl'],
-                                                      ),
-                                                      fit: BoxFit.fill),
-                                                  borderRadius:
-                                                      BorderRadius.circular(2.h)),
-                                              width: width * 0.18,
-                                              height: height * 0.034.h,
-                                            ),
-                                            Column(
-                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Container(
-                                              margin: EdgeInsets.only(left:1.w,bottom: 5.h,top: 1.h),
-                                                  child: Text(
-                                                    supStringTitle(data['title']),
-                                                    style: GoogleFonts.aBeeZee(
-                                                      fontSize: 30,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontWeight: FontWeight.w500,
-                                                      color: AppColors.white,
-                                                    ),
-                                                  ),
+                                                  margin: EdgeInsets.only(
+                                                      top: 2.h,
+                                                      left: 1.w,
+                                                      right: 1.w),
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            data['imageUrl'],
+                                                          ),
+                                                          fit: BoxFit.fill),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2.h)),
+                                                  width: width * 0.18,
+                                                  height: height * 0.034.h,
                                                 ),
-                                                SingleChildScrollView(
-                                                  child: SizedBox(
-                                                    width: width*0.75,
-                                                  height:  height * 0.020.h,
-                                                    child: Text(
-
-                                                      maxLines:3,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      supString(data['body'],width,height),
-                                                    //   style: GoogleFonts.robotoFlex(
-                                                    // fontSize: 18,
-                                                    //
-                                                    // fontStyle: FontStyle.normal,
-                                                    // fontWeight: FontWeight.w500,
-                                                    // color: AppColors.white,
-                                                    //   ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 1.w,
+                                                          bottom: 5.h,
+                                                          top: 1.h),
+                                                      child: Text(
+                                                        supStringTitle(
+                                                            data['title']),
+                                                        style:
+                                                            GoogleFonts.aBeeZee(
+                                                          fontSize: 30,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              AppColors.white,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
+                                                    SingleChildScrollView(
+                                                      child: SizedBox(
+                                                        width: width * 0.75,
+                                                        height:
+                                                            height * 0.020.h,
+                                                        child: Text(
+                                                          maxLines: 3,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          supString(
+                                                              data['body'],
+                                                              width,
+                                                              height),
+                                                          //   style: GoogleFonts.robotoFlex(
+                                                          // fontSize: 18,
+                                                          //
+                                                          // fontStyle: FontStyle.normal,
+                                                          // fontWeight: FontWeight.w500,
+                                                          // color: AppColors.white,
+                                                          //   ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
                                               ],
-                                            )
-                                          ],
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(right: 1.w),
-                                            alignment: Alignment.bottomRight,
-                                            child: Text(
-                                                '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
-                                                style: const TextStyle(
-                                                    color: AppColors.grey))),
-                                      ]),
+                                            ),
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(right: 1.w),
+                                                alignment:
+                                                    Alignment.bottomRight,
+                                                child: Text(
+                                                    '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
+                                                    style: const TextStyle(
+                                                        color:
+                                                            AppColors.grey))),
+                                          ]),
                                     ),
                                   ),
                                 ),

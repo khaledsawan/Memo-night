@@ -28,7 +28,7 @@ class AboutUsPage extends StatelessWidget {
     }
 
     _openntelegram() async {
-      var url = Uri.parse("https://t.me/Al_Hornet");
+      var url = Uri.parse("https://t.me/KHALEDSAWAN");
       if (await canLaunchUrl(url)) {
         await launchUrl(url);
       } else {
