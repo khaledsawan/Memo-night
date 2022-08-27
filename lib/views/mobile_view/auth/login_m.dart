@@ -6,18 +6,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:sizer/sizer.dart';
 
-import '../../../Databease/Services/auth_services.dart';
+import '../../../Database/Services/auth_services.dart';
 import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../routes/routes.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginM extends StatefulWidget {
+  const LoginM({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginM> createState() => _LoginMState();
 }
 
-class _LoginState extends State<Login> with TickerProviderStateMixin {
+class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -126,10 +126,12 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText: 'Email'.tr,
-                        prefixIcon: const Padding(
+                        labelStyle: TextStyle(fontSize: 14.sp),
+                        prefixIcon:  Padding(
                           padding:
                               EdgeInsets.only(), // add padding to adjust icon
                           child: Icon(
+                            size: 20.sp,
                             Icons.mail_outline,
                             color: Color(0xFF7423A8),
                           ),
@@ -151,11 +153,13 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       controller: controller.passwordController,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        prefixIcon: const Padding(
+                        prefixIcon:  Padding(
                           padding: EdgeInsets.only(),
                           child: Icon(
+
                             Icons.lock_open,
                             color: Color(0xFF7423A8),
+                            size: 20.sp,
                           ),
                         ),
                         labelStyle: TextStyle(fontSize: 14.sp),
@@ -189,7 +193,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     },
                     child: Container(
                       width: width * 0.05.h,
-                      height: height * 0.009.h,
+                      height: height * 0.01.h,
                       decoration: BoxDecoration(
                           color: const Color(0xFF7423A8),
                           borderRadius: BorderRadius.circular(1.5.h),
@@ -198,7 +202,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       child: Center(
                         child: Text(
                           'Sign In',
-                          style: TextStyle(fontSize: 15.sp),
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                       ),
                     ),

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../../Databease/model/note_model.dart';
-import '../../views/screens/crud/index.dart';
+import '../../Database/model/note_model.dart';
+import '../../views/mobile_view/crud/index_m.dart';
 
 class EditNoteController extends GetxController {
   late TextEditingController titleController, bodyController;
@@ -36,7 +36,7 @@ class EditNoteController extends GetxController {
         'time': DateTime.now(),
       }).then((value) {
         isLoading = false;
-        Get.to(const Index());
+        Get.to(const IndexM());
       }).catchError((error) => GetSnackBar(
             message: error.toString(),
           ));

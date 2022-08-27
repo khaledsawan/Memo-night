@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:sizer/sizer.dart';
-import '../../../Databease/model/note_model.dart';
+import '../../../Database/model/note_model.dart';
 import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
 import 'edit_notes.dart';

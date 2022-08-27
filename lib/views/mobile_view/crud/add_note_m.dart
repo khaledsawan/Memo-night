@@ -9,13 +9,13 @@ import 'package:sizer/sizer.dart';
 import '../../../logic/Controllers/AddNote_Controller.dart';
 import '../../../utils/colors.dart';
 
-class AddNote extends StatefulWidget {
-  const AddNote({Key? key}) : super(key: key);
+class AddNoteM extends StatefulWidget {
+  const AddNoteM({Key? key}) : super(key: key);
   @override
-  State<AddNote> createState() => _AddNoteState();
+  State<AddNoteM> createState() => _AddNoteMState();
 }
 
-class _AddNoteState extends State<AddNote> {
+class _AddNoteMState extends State<AddNoteM> {
   final AddNoteController controller = Get.find();
   showBottomSheet(context) {
     double height = MediaQuery.of(context).size.height;
@@ -174,12 +174,7 @@ class _AddNoteState extends State<AddNote> {
                           controller.bodyController != v;
                         },
                         controller: controller.bodyController,
-                        decoration:  InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: '',
-                          labelStyle: TextStyle(fontSize: 16.sp),
 
-                        ),
                       ),
                     ),
                     controller.imageName == ''

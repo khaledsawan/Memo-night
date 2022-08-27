@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 
-import '../../Databease/Services/auth_services.dart';
-import '../../Databease/model/response_model.dart';
+import '../../Database/Services/auth_services.dart';
+import '../../Database/model/response_model.dart';
 import '../../routes/routes.dart';
 
 class RegisterController extends GetxController {

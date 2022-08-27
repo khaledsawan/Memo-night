@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mnv2/views/View/auth/login.dart';
+import 'package:mnv2/views/View/crud/index.dart';
 import '../../../utils/colors.dart';
-import '../auth/login.dart';
-import '../crud/index.dart';
+import '../auth/login_m.dart';
+import '../crud/index_m.dart';
 
 class splachScreen extends StatefulWidget {
   @override

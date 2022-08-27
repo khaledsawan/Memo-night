@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 
-import '../../Databease/Services/auth_services.dart';
+import '../../Database/Services/auth_services.dart';
 import '../../routes/routes.dart';
-import '../../views/screens/crud/index.dart';
+import '../../views/mobile_view/crud/index_m.dart';
 
 class LoginController extends GetxController with GetSingleTickerProviderStateMixin {
   var isLoading = false.obs;
@@ -53,7 +53,7 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
     try {
       UserCredential data = await AuthService.signInWithGoogle();
       if (!data.isNull) {
-        Get.offAll(() => Index());
+        Get.offAll(() => IndexM());
       } else {
         Get.dialog(const Text('filed signup'));
       }

@@ -8,14 +8,14 @@ import '../../../routes/routes.dart';
 import 'dart:async';
 
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUpM extends StatefulWidget {
+  const SignUpM({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpM> createState() => _SignUpMState();
 }
 
-class _SignUpState extends State<SignUp>  with TickerProviderStateMixin{
+class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();

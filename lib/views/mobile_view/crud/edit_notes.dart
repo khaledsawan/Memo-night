@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-import '../../../Databease/model/note_model.dart';
+import '../../../Database/model/note_model.dart';
 import '../../../logic/Controllers/edit_note_controller.dart';
 import '../../../utils/colors.dart';
 

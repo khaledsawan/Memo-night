@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Databease/Services/auth_services.dart';
+import '../../Database/Services/auth_services.dart';
 import '../../routes/routes.dart';
 
 

@@ -1,14 +1,16 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:mnv2/views/View/crud/add_note.dart';
+import 'package:mnv2/views/View/crud/index.dart';
 import '../logic/bindings/AddNote_binding.dart';
 import '../logic/bindings/login_binding.dart';
 import '../logic/bindings/register_binding.dart';
-import '../views/screens/auth/login.dart';
-import '../views/screens/auth/signup.dart';
-import '../views/screens/contact_us/about_us_page.dart';
-import '../views/screens/contact_us/about_us_page.dart';
-import '../views/screens/crud/add_note.dart';
-import '../views/screens/crud/index.dart';
-import '../views/screens/splach_screen/splash_screen.dart';
+import '../views/View/auth/login.dart';
+import '../views/View/auth/sign_up.dart';
+import '../views/mobile_view/contact_us/about_us_page.dart';
+import '../views/mobile_view/crud/add_note_m.dart';
+import '../views/mobile_view/crud/index_m.dart';
+import '../views/mobile_view/splach_screen/splash_screen.dart';
+
 
 class AppRoutes {
   static const addnote = Routes.add;

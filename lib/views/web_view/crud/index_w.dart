@@ -4,25 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mnv2/views/View/crud/add_note.dart';
 import 'package:sizer/sizer.dart';
-import '../../../Databease/model/note_model.dart';
+import '../../../Database/model/note_model.dart';
 import '../../../logic/Controllers/AddNote_Controller.dart';
 import '../../../logic/Controllers/Auth_Controller.dart';
 import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../logic/Controllers/app_language.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
-import 'add_note.dart';
-import 'note_body_page.dart';
+import '../../mobile_view/crud/add_note_m.dart';
+import '../../mobile_view/crud/note_body_page.dart';
 
-class Index extends StatefulWidget {
-  const Index({Key? key}) : super(key: key);
+class IndexW extends StatefulWidget {
+  const IndexW({Key? key}) : super(key: key);
 
   @override
-  _IndexState createState() => _IndexState();
+  _IndexWState createState() => _IndexWState();
 }
 
-class _IndexState extends State<Index> with TickerProviderStateMixin {
+class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
   AuthController authService = Get.find();
   final String _selectedLang = 'en';
   late Map<String, dynamic> data;
@@ -44,16 +45,17 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
   Alignment begin = Alignment.bottomCenter;
   Alignment end = Alignment.topCenter;
 
-  String supString(String body) {
-    if (body.length > 25) {
-      return '${body.substring(0, 22)}...';
+  String supString(String body,double width,double height) {
+    if (body.length > 100) {
+      return '${body.substring(0,body.length)}...';
     } else {
       return body;
     }
   }
+
   String supStringTitle(String body) {
-    if (body.length > 20) {
-      return '${body.substring(0, 18)}...';
+    if (body.length > 50) {
+      return '${body.substring(0, 37)}...';
     } else {
       return body;
     }
@@ -84,7 +86,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
         Radius.circular(45.0),
       )),
       backgroundColor: AppColors.mainColor,
-      insetPadding: EdgeInsets.only(left: 70, right: 70),
+      insetPadding: const EdgeInsets.only(left: 70, right: 70),
       content: SizedBox(
           height: height * 0.01.h,
           child: Center(
@@ -151,19 +153,21 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
         appBar: AppBar(
             backgroundColor: AppColors.mainColor,
             title: Title(
-              title: 'Title',
+              title: '',
               color: Colors.white,
-              child: Text('Memo Night'.tr,
-                  style: GoogleFonts.marckScript(
-                    fontSize: 30.sp,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.blue,
-                  )),
+              child: Center(
+                child: Text('Memo Night'.tr,
+                    style: GoogleFonts.marckScript(
+                      fontSize: 43,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blue,
+                    )),
+              ),
             ),
             actions: <Widget>[
               Padding(
-                padding: EdgeInsets.only(right: 1.w, left: 1.w),
+                padding: EdgeInsets.only(right: 1.0.w),
                 child: Directionality(
                   textDirection: _selectedLang == 'en'
                       ? TextDirection.ltr
@@ -189,14 +193,14 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                                   value: 'en',
                                   child: Text(
                                     "En",
-                                    style: TextStyle(fontSize: 12.sp),
+                                    style: TextStyle(fontSize: 4.sp),
                                   ),
                                 ),
                                 DropdownMenuItem(
                                   value: 'ar',
                                   child: Text(
                                     "Ar",
-                                    style: TextStyle(fontSize: 12.sp),
+                                    style: TextStyle(fontSize: 4.sp),
                                   ),
                                 ),
                               ],
@@ -213,34 +217,45 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               ),
             ]),
         drawer: Drawer(
-          width: width * 0.15.w,
-          backgroundColor: AppColors.mainColor,
+          width: 225,
+          backgroundColor: AppColors.mainColorA,
           child: ListView(
             children: [
               DrawerHeader(
-                decoration: const BoxDecoration(
-
+                decoration: const BoxDecoration(),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 75,
+                      height: 75,
+                      alignment: Alignment.center,
+                      child: Image.asset('images/assets/2040510.png'),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Text('Setting'.tr,
+                          style: GoogleFonts.marckScript(
+                            fontSize: 25,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.blue,
+                          )),
+                    ),
+                  ],
                 ),
-                child: Center(
-                    child: Text('Settings'.tr,
-                        style: GoogleFonts.marckScript(
-                          fontSize: 40.sp,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.blue,
-                        ))),
               ),
               ListTile(
-                leading:  Icon(
+                leading: const Icon(
                   Icons.account_circle,
                   color: AppColors.iconColor1,
-                  size: 25.sp,
+                  size: 35,
                 ),
                 title: Text('Contact Us'.tr,
                     style: GoogleFonts.marckScript(
-                      fontSize:20.sp,
+                      fontSize: 30,
                       fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       color: AppColors.blue,
                     )),
                 onTap: () {
@@ -250,18 +265,18 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
                   // Then close the drawer
                 },
               ),
-             const  Divider(
+              const Divider(
                 color: AppColors.textColor,
-               height: 1,
+                height: 1,
               ),
               ListTile(
-                leading:  Icon(Icons.logout,
-                    color: AppColors.iconColor1, size: 25.sp),
+                leading: const Icon(Icons.logout,
+                    color: AppColors.iconColor1, size: 35),
                 title: Text('Log Out'.tr,
                     style: GoogleFonts.marckScript(
-                      fontSize: 20.sp,
+                      fontSize: 30,
                       fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       color: AppColors.blue,
                     )),
                 onTap: () async {
@@ -273,18 +288,26 @@ class _IndexState extends State<Index> with TickerProviderStateMixin {
               ),
               const Divider(
                 color: AppColors.textColor,
-height: 1,
+                height: 1,
               ),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.indigo,
-            onPressed: () {
-              Get.lazyPut(() => AddNoteController());
-              Get.to(const AddNote());
-            },
-            child: const Icon(Icons.add, color: AppColors.blue)),
+        floatingActionButton: Container(
+          margin: EdgeInsets.all(2.h),
+          padding: EdgeInsets.all(2.h),
+          child: FloatingActionButton(
+              backgroundColor: AppColors.indoo,
+              onPressed: () {
+                Get.lazyPut(() => AddNoteController());
+                Get.to(const AddNote());
+              },
+              child: const Icon(
+                Icons.edit,
+                color: AppColors.blue,
+                size: 25,
+              )),
+        ),
         body: AnimatedContainer(
           duration: const Duration(seconds: 2),
           onEnd: () {
@@ -355,12 +378,13 @@ height: 1,
                                       context, height, width, document.id);
                                 },
                                 child: Container(
+                                  alignment: Alignment.topLeft,
                                   margin: EdgeInsets.only(
                                       left: 2.w,
                                       right: 2.w,
                                       bottom: 1.h,
                                       top: 1.h),
-                                  height: height * 0.02.h,
+                                  height: height * 0.04.h,
                                   decoration: BoxDecoration(
                                     color: AppColors.blue2,
                                     borderRadius: BorderRadius.circular(2.h),
@@ -378,85 +402,82 @@ height: 1,
                                           id: document.id,
                                           body: data['body'],
                                           title: data['title'],
-                                          time: '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
+                                          time:
+                                              '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
                                           imageUrl: data['imageUrl']);
                                       Get.to(NoteBodyPage(note: note));
                                     },
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: NetworkImage(
-                                                          data['imageUrl'],
-                                                        ),
-                                                        fit: BoxFit.fill),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2.h)),
-                                                width: width * 0.085.w,
-                                                height: height * 0.0175.h,
-                                              ),
-                                              SizedBox(
-                                                width: width / 18.w,
-                                              ),
-                                              Column(
-                                                //crossAxisAlignment: CrossAxisAlignment.end,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 2.w,
-                                                        right: 2.w,
-                                                        bottom: 2.h,
-                                                        top: 1.h),
-                                                    child: Text(
-                                                      supStringTitle(data['title']),
-                                                      style: TextStyle(
-                                                          color:
-                                                              AppColors.white,
-                                                          fontSize: 17.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 2.h,
+                                                  left: 1.w,
+                                                  right: 1.w),
+                                              decoration: BoxDecoration(
+                                                  image:  DecorationImage(
+                                                      image: NetworkImage(
+                                                        data['imageUrl'],
+                                                      ),
+                                                      fit: BoxFit.fill),
+                                                  borderRadius:
+                                                      BorderRadius.circular(2.h)),
+                                              width: width * 0.18,
+                                              height: height * 0.034.h,
+                                            ),
+                                            Column(
+                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                              margin: EdgeInsets.only(left:1.w,bottom: 5.h,top: 1.h),
+                                                  child: Text(
+                                                    supStringTitle(data['title']),
+                                                    style: GoogleFonts.aBeeZee(
+                                                      fontSize: 30,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: AppColors.white,
                                                     ),
                                                   ),
-                                                  Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 2.w,
-                                                          right: 2.w,
-                                                          bottom: 2.h,
-                                                          top: 1.h),
-                                                      child: Text(
-                                                        supString(data['body']),
-                                                        style: TextStyle(
-                                                            color: AppColors
-                                                                .textColor,
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal),
-                                                      )),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Container(
-                                              margin:
-                                                  EdgeInsets.only(right: 1.5.w),
-                                              alignment: Alignment.bottomRight,
-                                              child: Text(
-                                                  '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
-                                                  style: const TextStyle(
-                                                      color: AppColors.grey))),
-                                        ]),
+                                                ),
+                                                SingleChildScrollView(
+                                                  child: SizedBox(
+                                                    width: width*0.75,
+                                                  height:  height * 0.020.h,
+                                                    child: Text(
+
+                                                      maxLines:3,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      supString(data['body'],width,height),
+                                                    //   style: GoogleFonts.robotoFlex(
+                                                    // fontSize: 18,
+                                                    //
+                                                    // fontStyle: FontStyle.normal,
+                                                    // fontWeight: FontWeight.w500,
+                                                    // color: AppColors.white,
+                                                    //   ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                            margin: EdgeInsets.only(right: 1.w),
+                                            alignment: Alignment.bottomRight,
+                                            child: Text(
+                                                '${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}',
+                                                style: const TextStyle(
+                                                    color: AppColors.grey))),
+                                      ]),
+                                    ),
                                   ),
                                 ),
                               ),

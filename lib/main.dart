@@ -5,10 +5,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mnv2/routes/routes.dart';
 import 'package:mnv2/utils/langs/translations.dart';
-import 'package:mnv2/views/screens/auth/login.dart';
-import 'package:mnv2/views/screens/auth/signup.dart';
-import 'package:mnv2/views/screens/crud/index.dart';
+import 'package:mnv2/views/mobile_view/auth/signup_m.dart';
+import 'package:mnv2/views/web_view/auth/login_w.dart';
+import 'package:mnv2/views/web_view/auth/signup_w.dart';
+import 'package:mnv2/views/web_view/crud/add_note_w.dart';
+import 'package:mnv2/views/web_view/crud/index_w.dart';
 import 'package:sizer/sizer.dart';
+import 'firebase_options.dart';
 import 'init/init.dart';
 import 'logic/Controllers/Login_Controller.dart';
 import 'logic/Controllers/Register_Controller.dart';
@@ -18,7 +21,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   await init();
   runApp(const MyApp());
@@ -56,11 +61,12 @@ class MyApp extends StatelessWidget {
             // GlobalWidgetsLocalizations.delegate,
             // GlobalCupertinoLocalizations.delegate,
           ],
-           getPages: AppRoutes.routes,
-          // initialRoute:AppRoutes.splashscreen ,
-          home: const Index(),
+          getPages: AppRoutes.routes,
+          initialRoute: AppRoutes.splashscreen,
+         // home:  const AddNoteW(),
         );
       },
     );
   }
 }
+//flutter run --web-renderer html

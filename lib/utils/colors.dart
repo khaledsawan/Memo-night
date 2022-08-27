@@ -7,6 +7,7 @@ class AppColors {
   static const Color grey = Color(0x79ffffff);
   // static final Color mainColor = const Color(0xFFffd28d); //0xFF89dad0
   static const Color mainColor = Color(0xFF111631);
+  static const Color mainColorA = Color(0x1A4520FF);
   static const Color mainColor2 = Color(0xBB202C62);
   //static final Color mainColor = const Color(0xFFfa7552);
   static const Color iconColor1 = Color(0xFF5D1C85);
@@ -15,6 +16,7 @@ class AppColors {
   static const Color blue2 = Color(0x18ff0000);
   static const Color red = Color(0xffff0000);
   static const Color black = Color(0xff0a0a0a);
+  static const Color indoo = Color(0x381C3185);
 
 
 }

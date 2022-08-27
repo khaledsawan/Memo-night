@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../Databease/Services/Notes_services.dart';
+import '../../Database/Services/Notes_services.dart';
 
 class AddNoteController extends GetxController {
   final insertProductForKey = GlobalKey<FormState>();
