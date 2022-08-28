@@ -99,7 +99,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                               fontSize: 20.sp,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xDA00BBFF),
+                              color:  AppColors.blue,
                             )),
                       ),
                     ),
@@ -124,7 +124,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                                   .only(), // add padding to adjust icon
                               child: Icon(
                                 Icons.person,
-                                color: Color(0xFF7423A8),
+                                color:  AppColors.iconColor1,
                               ),
                             ),
                           ),
@@ -151,7 +151,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                                 EdgeInsets.only(), // add padding to adjust icon
                             child: Icon(
                               Icons.mail,
-                              color: Color(0xFF7423A8),
+                              color:  AppColors.iconColor1,
                             ),
                           ),
                         ),
@@ -178,7 +178,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                                 EdgeInsets.only(), // add padding to adjust icon
                             child: Icon(
                               Icons.lock_open,
-                              color: Color(0xFF7423A8),
+                              color:  AppColors.iconColor1,
                             ),
                           ),
                         ),
@@ -204,7 +204,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                                 EdgeInsets.only(), // add padding to adjust icon
                             child: Icon(
                               Icons.phone_android,
-                              color: Color(0xFF7423A8),
+                              color:  AppColors.iconColor1,
                             ),
                           ),
                         ),
@@ -227,10 +227,10 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                         width: width * 0.02.h,
                         height: height * 0.009.h,
                         decoration: BoxDecoration(
-                            color: const Color(0xFF7423A8),
+                            color:  AppColors.iconColor1,
                             borderRadius: BorderRadius.circular(1.5.h),
                             border: Border.all(
-                                width: 1, color: const Color(0xDA00BBFF))),
+                                width: 1, color:  AppColors.blue,)),
                         child: Center(
                           child: Text(
                             'Register',
@@ -238,7 +238,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                               fontSize: 5.sp,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xDA00BBFF),
+                              color:  AppColors.blue,
                             ),
                           ),
                         ),
@@ -258,7 +258,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                                 TextSpan(
                                     text: ' Sign In',
                                     style: TextStyle(
-                                        color: Colors.blueAccent,
+                                        color:  AppColors.blue,
                                         fontSize: 3.5.sp),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -292,7 +292,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                             child: IconButton(
                               icon: Image.asset(
                                   'images/assets/icons8google96.png'),
-                              color: Colors.white,
+                              color:  AppColors.white,
                               onPressed: () {
                                 controller.doLoginGoogle();
                                 // google().signInWithGoogle();
@@ -305,7 +305,7 @@ class _SignUpWState extends State<SignUpW> with TickerProviderStateMixin {
                             margin: EdgeInsets.fromLTRB(1.w, 1.h, 0.w, 1.h),
                             child: IconButton(
                               icon: Image.asset('images/assets/facebook96.jpg'),
-                              color: Colors.white,
+                              color:  AppColors.white,
                               onPressed: () {
                                 controller.doLoginFacebook();
                               },

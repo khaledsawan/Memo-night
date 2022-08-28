@@ -109,7 +109,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                               fontSize: 20.sp,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xDA00BBFF),
+                              color:  AppColors.blue,
                             )),
                       ),
                     ),
@@ -136,7 +136,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                             child: Icon(
                               size: 6.sp,
                               Icons.mail_outline,
-                              color: const Color(0xFF7423A8),
+                              color:  AppColors.iconColor1,
                             ),
                           ),
                         ),
@@ -160,7 +160,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                             padding: const EdgeInsets.only(),
                             child: Icon(
                               Icons.lock_open,
-                              color: const Color(0xFF7423A8),
+                              color: AppColors.iconColor1,
                               size: 6.sp,
                             ),
                           ),
@@ -198,17 +198,17 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                         width: width * 0.02.h,
                         height: height * 0.009.h,
                         decoration: BoxDecoration(
-                            color: const Color(0xFF7423A8),
+                            color:  AppColors.iconColor1,
                             borderRadius: BorderRadius.circular(1.5.h),
                             border: Border.all(
-                                width: 1, color: const Color(0xDA00BBFF))),
+                                width: 1, color:  AppColors.blue,)),
                         child: Center(
                           child: Text('Sign In',
                               style: GoogleFonts.robotoCondensed(
                                 fontSize: 5.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xDA00BBFF),
+                                color:   AppColors.blue,
                               )),
                         ),
                       ),
@@ -228,7 +228,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                                 TextSpan(
                                     text: ' Sign up',
                                     style: TextStyle(
-                                        color: Colors.blueAccent,
+                                        color: AppColors.blue,
                                         fontSize: 5.2.sp),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -262,7 +262,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                             child: IconButton(
                               icon: Image.asset(
                                   'images/assets/icons8google96.png'),
-                              color: Colors.white,
+                              color:  AppColors.white,
                               onPressed: () {
                                 controller.doLoginGoogle();
                                 // google().signInWithGoogle();
@@ -275,7 +275,7 @@ class _LoginWState extends State<LoginW> with TickerProviderStateMixin {
                             margin: EdgeInsets.fromLTRB(0.w, 1.h, 1.w, 1.h),
                             child: IconButton(
                               icon: Image.asset('images/assets/facebook96.jpg'),
-                              color: Colors.white,
+                              color:  AppColors.white,
                               onPressed: () {
                                 controller.doLoginFacebook();
                               },

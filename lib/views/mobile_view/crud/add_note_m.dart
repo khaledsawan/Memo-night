@@ -202,7 +202,7 @@ class _AddNoteMState extends State<AddNoteM> {
                               )),
                             ),
                           )
-                        : Container(
+                        : SizedBox(
 
                             width: width-width*0.05,
                             height: height * 0.35,
@@ -244,8 +244,7 @@ class _AddNoteMState extends State<AddNoteM> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-                child:  Icon(Icons.add, color: AppColors.blue,size: 5.h,),
-                backgroundColor: Colors.indigo,
+                backgroundColor:  AppColors.indoo,
                 onPressed: () async {
                   setState(() {
                     controller.isLoad;
@@ -254,7 +253,8 @@ class _AddNoteMState extends State<AddNoteM> {
                   setState(() {
                     controller.isLoad;
                   });
-                }),
+                },
+                child:  Icon(Icons.add, color: AppColors.blue,size: 5.h,)),
           )
         : Scaffold(
             appBar: AppBar(

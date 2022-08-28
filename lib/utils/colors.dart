@@ -17,6 +17,8 @@ class AppColors {
   static const Color red = Color(0xffff0000);
   static const Color black = Color(0xff0a0a0a);
   static const Color indoo = Color(0x381C3185);
+  static const Color primaryColor = Color(0xFF0A0E21);
+  static const Color backGroundColor = Color(0xFF0A0E21);
 
 
 }

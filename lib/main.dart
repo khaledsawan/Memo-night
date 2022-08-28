@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mnv2/routes/routes.dart';
+import 'package:mnv2/utils/colors.dart';
 import 'package:mnv2/utils/langs/translations.dart';
 import 'package:sizer/sizer.dart';
 import 'firebase_options.dart';
@@ -40,29 +41,22 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialBinding: AuthBinding(),
           theme: ThemeData.dark().copyWith(
-            primaryColor: const Color(0xFF0A0E21),
-            scaffoldBackgroundColor: const Color(0xFF0A0E21),
-            secondaryHeaderColor: const Color(0xFF0A0E21),
-            backgroundColor: const Color(0xFF0A0E21),
-            buttonColor: const Color(0xFF550101),
-            bottomAppBarColor: const Color(0xFF7423A8),
-            cardColor: const Color(0xFF0D1D7F),
+            primaryColor: AppColors.primaryColor,
+            scaffoldBackgroundColor:AppColors.backGroundColor,
+            secondaryHeaderColor: AppColors.backGroundColor,
+            backgroundColor: AppColors.backGroundColor,
+            buttonColor: AppColors.red,
+            bottomAppBarColor: AppColors.iconColor1,
           ),
           translations: Translation(),
           locale: const Locale('en'),
           fallbackLocale: const Locale('en'),
           localizationsDelegates: const [
-            // GlobalMaterialLocalizations.delegate,
-            // GlobalWidgetsLocalizations.delegate,
-            // GlobalCupertinoLocalizations.delegate,
           ],
           getPages: AppRoutes.routes,
           initialRoute: AppRoutes.splashscreen,
-
-          // home:   AddNoteW(),
         );
       },
     );
   }
 }
-//flutter run --web-renderer html

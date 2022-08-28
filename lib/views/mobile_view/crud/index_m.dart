@@ -121,7 +121,7 @@ class _IndexMState extends State<IndexM> with TickerProviderStateMixin {
                         fontSize: 35,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xDA00BBFF),
+                        color:  AppColors.blue,
                       ),
                     )
                   ],
@@ -152,7 +152,7 @@ class _IndexMState extends State<IndexM> with TickerProviderStateMixin {
             backgroundColor: AppColors.mainColor,
             title: Title(
               title: 'Title',
-              color: Colors.white,
+              color:  AppColors.white,
               child: Text('Memo Night'.tr,
                   style: GoogleFonts.marckScript(
                     fontSize: 30.sp,
@@ -414,32 +414,32 @@ height: 1,
 
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                        left: 2.w,
-                                                        right: 2.w,
-                                                        bottom: 2.h,
+                                                        left: 1.w,
+                                                        right: 1.w,
+                                                        bottom: 1.h,
                                                         top: 1.h),
                                                     child: Text(
                                                       supStringTitle(data['title']),
                                                       style: TextStyle(
                                                           color:
                                                               AppColors.white,
-                                                          fontSize: 17.sp,
+                                                          fontSize: 14.sp,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
                                                   ),
                                                   Container(
                                                       margin: EdgeInsets.only(
-                                                          left: 2.w,
-                                                          right: 2.w,
-                                                          bottom: 2.h,
+                                                          left: 1.w,
+                                                          right: 1.w,
+                                                          bottom: 1.h,
                                                           top: 1.h),
                                                       child: Text(
                                                         supString(data['body']),
                                                         style: TextStyle(
                                                             color: AppColors
                                                                 .textColor,
-                                                            fontSize: 14.sp,
+                                                            fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .normal),

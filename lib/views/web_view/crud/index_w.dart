@@ -125,7 +125,7 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
                           fontSize: 24,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w500,
-                          color: const Color(0xDA00BBFF),
+                          color:  AppColors.blue,
                         ),
                       )
                     ],
@@ -157,7 +157,7 @@ class _IndexWState extends State<IndexW> with TickerProviderStateMixin {
             backgroundColor: AppColors.mainColor,
             title: Title(
               title: '',
-              color: Colors.white,
+              color:  AppColors.white,
               child: Center(
                 child: Text('Memo Night'.tr,
                     style: GoogleFonts.marckScript(

@@ -7,6 +7,8 @@ import '../../../logic/Controllers/Register_Controller.dart';
 import '../../../routes/routes.dart';
 import 'dart:async';
 
+import '../../../utils/colors.dart';
+
 
 class SignUpM extends StatefulWidget {
   const SignUpM({Key? key}) : super(key: key);
@@ -87,7 +89,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                     style: GoogleFonts.marckScript(fontSize: 50.sp,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
-                      color: const Color(0xDA00BBFF),)
+                      color: AppColors.blue,)
                   ),
                 ),
               ),
@@ -116,7 +118,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                                     .only(), // add padding to adjust icon
                                 child: Icon(
                                   Icons.person,
-                                  color: Color(0xFF7423A8),
+                                  color: AppColors.iconColor1,
                                 ),
                               ),
                             ),
@@ -142,7 +144,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                               EdgeInsets.only(), // add padding to adjust icon
                               child: Icon(
                                 Icons.mail,
-                                color: Color(0xFF7423A8),
+                                color:  AppColors.iconColor1,
                               ),
                             ),
                           ),
@@ -169,7 +171,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                               EdgeInsets.only(), // add padding to adjust icon
                               child: Icon(
                                 Icons.lock_open,
-                                color: Color(0xFF7423A8),
+                                color:  AppColors.iconColor1,
                               ),
                             ),
                           ),
@@ -195,7 +197,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                               EdgeInsets.only(), // add padding to adjust icon
                               child: Icon(
                                 Icons.phone_android,
-                                color: Color(0xFF7423A8),
+                                color: AppColors.iconColor1,
                               ),
                             ),
                           ),
@@ -218,10 +220,10 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                           width: width * 0.05.h,
                           height: height * 0.009.h,
                           decoration: BoxDecoration(
-                              color: const Color(0xFF7423A8),
+                              color:  AppColors.iconColor1,
                               borderRadius: BorderRadius.circular(1.5.h),
                               border: Border.all(
-                                  width: 1, color: const Color(0xDA00BBFF))),
+                                  width: 1, color:  AppColors.blue,)),
                           child:  Center(
                             child: Text(
                               'Register',
@@ -240,12 +242,12 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                             text: TextSpan(
                                 text: 'You have Account?',
                                 style:  TextStyle(
-                                    color: const Color(0xFF7423A8), fontSize: 14.sp),
+                                    color:  AppColors.iconColor1, fontSize: 14.sp),
                                 children: <TextSpan>[
                                   TextSpan(
                                       text: ' Sign In',
                                       style:  TextStyle(
-                                          color: Colors.blueAccent, fontSize: 16.sp),
+                                          color:  AppColors.blue, fontSize: 16.sp),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           Get.toNamed(AppRoutes.login);
@@ -260,7 +262,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                           'OR'.tr,
                           style:  TextStyle(
                             fontSize: 16.sp,
-                            color:Colors.white,
+                            color: AppColors.white,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
@@ -278,7 +280,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                               margin: const EdgeInsets.all(4),
                               child: IconButton(
                                 icon: Image.asset('images/assets/icons8google96.png'),
-                                color: Colors.white,
+                                color:  AppColors.white,
                                 onPressed: () {
                                   controller.doLoginGoogle();
                                   // google().signInWithGoogle();
@@ -291,7 +293,7 @@ class _SignUpMState extends State<SignUpM>  with TickerProviderStateMixin{
                               margin: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                               child: IconButton(
                                 icon: Image.asset('images/assets/facebook96.jpg'),
-                                color: Colors.white,
+                                color:  AppColors.white,
                                 onPressed: () {
                                   controller.doLoginFacebook();
                                 },

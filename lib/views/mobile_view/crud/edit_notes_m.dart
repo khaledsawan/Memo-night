@@ -49,7 +49,7 @@ class _EditNoteMState extends State<EditNoteM> {
                         ),
                       ))),
               floatingActionButton: FloatingActionButton(
-                  backgroundColor: Colors.indigo,
+                  backgroundColor:  AppColors.indoo,
                   onPressed: () async {
                     controller.updateNote(note);
                   },

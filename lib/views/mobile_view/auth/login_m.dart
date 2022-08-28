@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../Database/Services/auth_services.dart';
 import '../../../logic/Controllers/Login_Controller.dart';
 import '../../../routes/routes.dart';
+import '../../../utils/colors.dart';
 
 class LoginM extends StatefulWidget {
   const LoginM({Key? key}) : super(key: key);
@@ -105,7 +106,7 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                             fontSize: 75.sp,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xDA00BBFF),
+                            color: AppColors.blue,
                           )),
                     ),
                   ),
@@ -133,7 +134,7 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                           child: Icon(
                             size: 20.sp,
                             Icons.mail_outline,
-                            color: const Color(0xFF7423A8),
+                            color: AppColors.iconColor1,
                           ),
                         ),
                       ),
@@ -158,7 +159,7 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                           child: Icon(
 
                             Icons.lock_open,
-                            color: const Color(0xFF7423A8),
+                            color: AppColors.iconColor1,
                             size: 20.sp,
                           ),
                         ),
@@ -167,26 +168,11 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   // height: 1.h,
-                  // ),
-                  // TextButton(
-                  //  // onPressed: _resetPassword(context),
-                  //
-                  //   onPressed: () {  },
-                  //   child: const Text('Forgot password?'),
-                  // ),
-                  // SizedBox(
-                  //   height: 10.h,
-                  // ),
                   Obx(
                     () => controller.isLoading.value == true
                         ? const Center(child: CircularProgressIndicator())
                         : const Text(""),
                   ),
-                  // SizedBox(
-                  //   height: 10.h,
-                  // ),
                   GestureDetector(
                     onTap: () async {
                       await controller.doLoginEmailPassword();
@@ -195,10 +181,10 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                       width: width * 0.05.h,
                       height: height * 0.01.h,
                       decoration: BoxDecoration(
-                          color: const Color(0xFF7423A8),
+                          color: AppColors.iconColor1,
                           borderRadius: BorderRadius.circular(1.5.h),
                           border: Border.all(
-                              width: 1, color: const Color(0xDA00BBFF))),
+                              width: 1, color: AppColors.blue,)),
                       child: Center(
                         child: Text(
                           'Sign In',
@@ -217,13 +203,13 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                         text: TextSpan(
                             text: 'Don\'t have an account?',
                             style: TextStyle(
-                                color: const Color(0xFF7423A8),
+                                color:AppColors.iconColor1,
                                 fontSize: 14.sp),
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Sign up',
                                   style: TextStyle(
-                                      color: Colors.blueAccent,
+                                      color:AppColors.blue,
                                       fontSize: 16.sp),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
@@ -257,7 +243,7 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                           child: IconButton(
                             icon:
                                 Image.asset('images/assets/icons8google96.png'),
-                            color: Colors.white,
+                            color: AppColors.white,
                             onPressed: () {
                               controller.doLoginGoogle();
                               // google().signInWithGoogle();
@@ -270,7 +256,7 @@ class _LoginMState extends State<LoginM> with TickerProviderStateMixin {
                           margin: EdgeInsets.fromLTRB(1.w, 1.h, 1.w, 1.h),
                           child: IconButton(
                             icon: Image.asset('images/assets/facebook96.jpg'),
-                            color: Colors.white,
+                            color: AppColors.white,
                             onPressed: () {
                               controller.doLoginFacebook();
                             },

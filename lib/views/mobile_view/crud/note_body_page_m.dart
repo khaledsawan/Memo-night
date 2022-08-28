@@ -55,7 +55,7 @@ class _NoteBodyPageMState extends State<NoteBodyPageM> {
                   ),
                 ))),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.indigo,
+            backgroundColor:  AppColors.indoo,
             onPressed: () async {
               Get.lazyPut(() => EditNoteController());
               Get.to(EditNote(note: note));
